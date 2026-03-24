@@ -3415,5 +3415,11 @@ async function sendGemini() {
     </div>
   </div>
 </div>
+   <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js')
+    .then(() => console.log('SW registered'));
+}
+</script>
 </body>
 </html>
