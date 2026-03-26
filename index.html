@@ -1703,14 +1703,14 @@ const SESSION_DAYS = 15;
 // ═══════════════════════════════════════════════════════
 async function api(action, payload={}) {
   const data = JSON.stringify({ action, token: APP_TOKEN, ...payload });
-  const url  = GAS_URL + '?data=' + encodeURIComponent(data);
-  // Android Chrome requires credentials:'omit' + cache:'no-store' to correctly
-  // follow GAS cross-origin redirects without dropping auth context
+  // Timestamp busts service-worker and browser cache on Android
+  const url  = GAS_URL + '?data=' + encodeURIComponent(data) + '&_t=' + Date.now();
   const res  = await fetch(url, {
     method: 'GET',
     redirect: 'follow',
     credentials: 'omit',
-    cache: 'no-store'
+    cache: 'no-store',
+    headers: { 'Cache-Control': 'no-cache' }
   });
   const text = await res.text();
   let json;
@@ -1961,7 +1961,7 @@ async function apiRaw(action, payload = {}) {
   try {
     const data = JSON.stringify({ action, token: APP_TOKEN, ...payload });
     const url  = GAS_URL + '?data=' + encodeURIComponent(data);
-    const res  = await fetch(url, { method: 'GET', redirect: 'follow', credentials: 'omit', cache: 'no-store' });
+    const res  = await fetch(url, { method: 'GET', redirect: 'follow', credentials: 'omit', cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } });
     return JSON.parse(await res.text());
   } catch(e) {
     return { success: false, message: e.message };
@@ -3490,9 +3490,11 @@ async function sendGemini() {
   </div>
 </div>
    <script>
+// Unregister any cached service worker — it can intercept and block API calls on Android
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./service-worker.js')
-    .then(() => console.log('SW registered'));
+  navigator.serviceWorker.getRegistrations().then(regs => {
+    regs.forEach(r => r.unregister());
+  });
 }
 </script>
 </body>
