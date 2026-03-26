@@ -1703,19 +1703,12 @@ const SESSION_DAYS = 15;
 // ═══════════════════════════════════════════════════════
 async function api(action, payload={}) {
   const data = JSON.stringify({ action, token: APP_TOKEN, ...payload });
-  // Timestamp busts service-worker and browser cache on Android
   const url  = GAS_URL + '?data=' + encodeURIComponent(data) + '&_t=' + Date.now();
-  const res  = await fetch(url, {
-    method: 'GET',
-    redirect: 'follow',
-    credentials: 'omit',
-    cache: 'no-store',
-    headers: { 'Cache-Control': 'no-cache' }
-  });
+  const res  = await fetch(url, { method: 'GET', redirect: 'follow', credentials: 'omit' });
   const text = await res.text();
   let json;
   try { json = JSON.parse(text); }
-  catch(e) { throw new Error('Bad server response. Check GAS deployment is set to "Anyone".'); }
+  catch(e) { throw new Error('Bad server response'); }
   if (!json.success) throw new Error(json.message || 'API error');
   return json;
 }
@@ -1961,7 +1954,7 @@ async function apiRaw(action, payload = {}) {
   try {
     const data = JSON.stringify({ action, token: APP_TOKEN, ...payload });
     const url  = GAS_URL + '?data=' + encodeURIComponent(data);
-    const res  = await fetch(url, { method: 'GET', redirect: 'follow', credentials: 'omit', cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } });
+    const res  = await fetch(url, { method: 'GET', redirect: 'follow', credentials: 'omit' });
     return JSON.parse(await res.text());
   } catch(e) {
     return { success: false, message: e.message };
@@ -3490,11 +3483,15 @@ async function sendGemini() {
   </div>
 </div>
    <script>
-// Unregister any cached service worker — it can intercept and block API calls on Android
+// Kill any active service worker — it intercepts fetch and blocks GAS API calls
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.getRegistrations().then(regs => {
-    regs.forEach(r => r.unregister());
+    regs.forEach(r => r.unregister().then(() => console.log('SW unregistered')));
   });
+  // Also clear all caches
+  if (window.caches) {
+    caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+  }
 }
 </script>
 </body>
