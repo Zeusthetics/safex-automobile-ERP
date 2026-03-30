@@ -792,6 +792,102 @@ tbody tr:hover td{background:var(--surface-2)!important;transition:background .1
 .settings-divider{height:1px;background:var(--border-light);margin:24px 0 20px}
 .settings-section{margin-top:28px;padding-top:4px}
 
+/* ── NOTIFICATION SETTINGS ── */
+.notif-config-card{
+  background:var(--surface-1);
+  border:1px solid var(--border-light);
+  border-radius:var(--r-md);
+  padding:16px;
+  margin-bottom:14px;
+}
+.notif-config-card h4{
+  font-size:13px;font-weight:700;color:var(--txt-primary);
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.notif-permission-banner{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 14px;
+  background:rgba(238,56,59,.06);
+  border:1px solid var(--red-border);
+  border-radius:var(--r-sm);
+  margin-bottom:14px;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.notif-permission-banner p{font-size:13px;color:var(--txt-secondary);flex:1;min-width:160px}
+.notif-granted-banner{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 14px;
+  background:rgba(22,163,74,.08);
+  border:1px solid rgba(22,163,74,.25);
+  border-radius:var(--r-sm);
+  margin-bottom:14px;
+  font-size:13px;color:#16a34a;
+}
+/* Interval pills */
+.interval-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+@media(max-width:400px){.interval-grid{grid-template-columns:repeat(2,1fr)}}
+.interval-pill{
+  padding:10px 6px;
+  background:var(--surface-0);
+  border:1.5px solid var(--border-light);
+  border-radius:var(--r-sm);
+  text-align:center;cursor:pointer;
+  transition:all .15s;
+  font-family:var(--font-mono);font-size:12px;
+  color:var(--txt-secondary);
+  user-select:none;
+}
+.interval-pill:hover{border-color:var(--border-mid);color:var(--txt-primary)}
+.interval-pill.active{
+  background:rgba(238,56,59,.08);
+  border-color:var(--red);
+  color:var(--red);
+  font-weight:600;
+}
+.interval-pill .ip-val{font-size:18px;font-weight:700;display:block;margin-bottom:2px;line-height:1}
+.interval-pill .ip-lbl{font-size:10px;color:var(--txt-muted)}
+.interval-pill.active .ip-lbl{color:var(--red);opacity:.8}
+
+/* Notification type toggles */
+.notif-type-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid var(--border-light);
+}
+.notif-type-row:last-child{border-bottom:none}
+.notif-type-info{flex:1}
+.notif-type-info .ntl{font-size:13px;font-weight:600;color:var(--txt-primary)}
+.notif-type-info .nts{font-size:11px;color:var(--txt-muted);margin-top:2px;font-family:var(--font-mono)}
+/* Toggle switch */
+.tgl-wrap{position:relative;width:42px;height:24px;flex-shrink:0}
+.tgl-inp{opacity:0;width:0;height:0;position:absolute}
+.tgl-slider{
+  position:absolute;inset:0;
+  background:var(--border-mid);
+  border-radius:12px;cursor:pointer;
+  transition:background .2s;
+}
+.tgl-slider::before{
+  content:'';position:absolute;
+  width:18px;height:18px;border-radius:50%;
+  background:#fff;left:3px;top:3px;
+  transition:transform .2s;
+  box-shadow:0 1px 3px rgba(0,0,0,.2);
+}
+.tgl-inp:checked + .tgl-slider{background:var(--red)}
+.tgl-inp:checked + .tgl-slider::before{transform:translateX(18px)}
+
+/* Next notification countdown */
+.notif-next-info{
+  font-family:var(--font-mono);font-size:11px;
+  color:var(--txt-muted);
+  padding:8px 0 0;
+  display:flex;align-items:center;gap:6px;
+}
+.notif-next-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
+
 
 /* ══════════════════════════════════════════════
    GEMINI AI — Floating Button + Chat Panel
@@ -1507,6 +1603,110 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
           <button class="btn-p" style="width:auto;padding:10px 20px;font-size:14px" onclick="saveGeminiKey()">Save to Sheets</button>
           <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:11px;color:#4285f4;text-decoration:none">Get free key →</a>
         </div>
+
+        <!-- ═══ NOTIFICATION SETTINGS ═══ -->
+        <div class="settings-divider" style="margin-top:24px"></div>
+        <div class="ph" style="margin-bottom:16px">
+          <h1 style="font-size:18px">🔔 Task Notifications</h1>
+          <p style="font-size:13px">Get OS notifications about task status on Android &amp; PC</p>
+        </div>
+
+        <!-- Permission banner -->
+        <div id="notif-perm-banner" class="notif-permission-banner" style="display:none">
+          <p>🔕 Notifications are <strong>blocked</strong>. Enable them to get task alerts on this device.</p>
+          <button class="btn-sm" onclick="requestNotifPermission()">Enable Notifications</button>
+        </div>
+        <div id="notif-perm-granted" class="notif-granted-banner" style="display:none">
+          ✅ <strong>Notifications enabled</strong> on this device
+        </div>
+
+        <!-- Interval selector -->
+        <div class="notif-config-card">
+          <h4>⏱ Reminder Interval</h4>
+          <p style="font-size:12px;color:var(--txt-muted);margin-bottom:10px">How often to notify you about pending, in-progress and delayed tasks</p>
+          <div class="interval-grid">
+            <div class="interval-pill" id="iv-0" onclick="setNotifInterval(0)">
+              <span class="ip-val">OFF</span><span class="ip-lbl">disabled</span>
+            </div>
+            <div class="interval-pill" id="iv-1" onclick="setNotifInterval(1)">
+              <span class="ip-val">1</span><span class="ip-lbl">hour</span>
+            </div>
+            <div class="interval-pill" id="iv-3" onclick="setNotifInterval(3)">
+              <span class="ip-val">3</span><span class="ip-lbl">hours</span>
+            </div>
+            <div class="interval-pill" id="iv-6" onclick="setNotifInterval(6)">
+              <span class="ip-val">6</span><span class="ip-lbl">hours</span>
+            </div>
+            <div class="interval-pill" id="iv-12" onclick="setNotifInterval(12)">
+              <span class="ip-val">12</span><span class="ip-lbl">hours</span>
+            </div>
+          </div>
+          <div class="notif-next-info" id="notif-next-info" style="display:none">
+            <div class="notif-next-dot"></div>
+            <span id="notif-next-txt">Next notification in …</span>
+          </div>
+        </div>
+
+        <!-- What to notify about -->
+        <div class="notif-config-card">
+          <h4>📋 What to notify about</h4>
+          <div class="notif-type-row">
+            <div class="notif-type-info">
+              <div class="ntl">🟡 Pending Tasks</div>
+              <div class="nts">Tasks not yet started</div>
+            </div>
+            <label class="tgl-wrap">
+              <input type="checkbox" class="tgl-inp" id="nt-pending" onchange="saveNotifPrefs()" checked>
+              <span class="tgl-slider"></span>
+            </label>
+          </div>
+          <div class="notif-type-row">
+            <div class="notif-type-info">
+              <div class="ntl">🔵 In Progress Tasks</div>
+              <div class="nts">Tasks currently being worked on</div>
+            </div>
+            <label class="tgl-wrap">
+              <input type="checkbox" class="tgl-inp" id="nt-progress" onchange="saveNotifPrefs()" checked>
+              <span class="tgl-slider"></span>
+            </label>
+          </div>
+          <div class="notif-type-row">
+            <div class="notif-type-info">
+              <div class="ntl">🔴 Delayed Tasks</div>
+              <div class="nts">Overdue or marked as delayed</div>
+            </div>
+            <label class="tgl-wrap">
+              <input type="checkbox" class="tgl-inp" id="nt-delayed" onchange="saveNotifPrefs()" checked>
+              <span class="tgl-slider"></span>
+            </label>
+          </div>
+          <div class="notif-type-row">
+            <div class="notif-type-info">
+              <div class="ntl">📌 New Task Assigned</div>
+              <div class="nts">When Director assigns you a task</div>
+            </div>
+            <label class="tgl-wrap">
+              <input type="checkbox" class="tgl-inp" id="nt-assigned" onchange="saveNotifPrefs()" checked>
+              <span class="tgl-slider"></span>
+            </label>
+          </div>
+          <div class="notif-type-row">
+            <div class="notif-type-info">
+              <div class="ntl">🔔 @Mentions &amp; Dependencies</div>
+              <div class="nts">When someone tags you or marks you as a blocker</div>
+            </div>
+            <label class="tgl-wrap">
+              <input type="checkbox" class="tgl-inp" id="nt-mentions" onchange="saveNotifPrefs()" checked>
+              <span class="tgl-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Test button -->
+        <button class="btn-s" style="width:100%;margin-top:4px" onclick="sendTestNotification()">
+          🔔 Send Test Notification
+        </button>
+
       </div>
     </div>
   </div>
@@ -2835,6 +3035,8 @@ function renderAdmin() {
   const gemKey=localStorage.getItem('sx_gemini_key')||'';
   const kInp=document.getElementById('gemini-key-inp');
   if(kInp) kInp.value=gemKey ? '••••••••••••••••' : '';
+  // Load notification settings
+  setTimeout(loadNotifSettingsUI, 50);
 }
 function openAddUser() { editUser=null; document.getElementById('um-title').textContent='Add Employee'; ['u-id','u-name','u-empid','u-dept','u-pin'].forEach(i=>document.getElementById(i).value=''); document.getElementById('u-role').value='Engineer'; document.getElementById('del-user-btn').style.display='none'; openMo('user-mo'); }
 function openEditUser(id) { const u=USERS.find(x=>x.id===id); if(!u) return; editUser=u; document.getElementById('um-title').textContent='Edit Employee'; document.getElementById('u-id').value=u.id; document.getElementById('u-name').value=u.name; document.getElementById('u-empid').value=u.empId; document.getElementById('u-role').value=u.role; document.getElementById('u-dept').value=u.dept||''; document.getElementById('u-pin').value=u.pin; document.getElementById('del-user-btn').style.display=''; openMo('user-mo'); }
@@ -3483,16 +3685,341 @@ async function sendGemini() {
   </div>
 </div>
    <script>
-// Kill any active service worker — it intercepts fetch and blocks GAS API calls
+// Kill any FETCH-intercepting service workers — they block GAS API calls
+// We register a new minimal SW only for push/notification support
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.getRegistrations().then(regs => {
-    regs.forEach(r => r.unregister().then(() => console.log('SW unregistered')));
+    regs.forEach(r => {
+      // Keep our own SAFEX notification SW, kill all others
+      if (!r.scope.includes('safex-notif')) {
+        r.unregister();
+      }
+    });
   });
-  // Also clear all caches
   if (window.caches) {
     caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
   }
 }
+
+// ══════════════════════════════════════════════════════════════
+//  NOTIFICATION ENGINE
+//  Works on: Android (Chrome PWA), Windows (Chrome/Edge), macOS
+//  Uses: Web Notifications API + setInterval scheduling
+//  No push server needed — fully client-side
+// ══════════════════════════════════════════════════════════════
+const NOTIF_PREFS_KEY   = 'sx_notif_prefs';
+const NOTIF_LAST_KEY    = 'sx_notif_last';
+let   _notifTimer       = null;
+let   _notifCountdown   = null;
+
+// Default preferences
+const DEFAULT_NOTIF_PREFS = {
+  interval:  1,       // hours (0 = off)
+  pending:   true,
+  progress:  true,
+  delayed:   true,
+  assigned:  true,
+  mentions:  true,
+};
+
+function getNotifPrefs() {
+  try {
+    return { ...DEFAULT_NOTIF_PREFS, ...JSON.parse(localStorage.getItem(NOTIF_PREFS_KEY)||'{}') };
+  } catch(e) { return { ...DEFAULT_NOTIF_PREFS }; }
+}
+
+function saveNotifPrefs() {
+  const prefs = {
+    interval: getNotifPrefs().interval,
+    pending:  document.getElementById('nt-pending')?.checked  ?? true,
+    progress: document.getElementById('nt-progress')?.checked ?? true,
+    delayed:  document.getElementById('nt-delayed')?.checked  ?? true,
+    assigned: document.getElementById('nt-assigned')?.checked ?? true,
+    mentions: document.getElementById('nt-mentions')?.checked ?? true,
+  };
+  localStorage.setItem(NOTIF_PREFS_KEY, JSON.stringify(prefs));
+  showToast('Notification preferences saved ✓');
+}
+
+// ── Permission ────────────────────────────────────────────────
+async function requestNotifPermission() {
+  if (!('Notification' in window)) {
+    showToast('Notifications not supported in this browser');
+    return;
+  }
+  const result = await Notification.requestPermission();
+  updateNotifPermissionUI();
+  if (result === 'granted') {
+    showToast('Notifications enabled ✓');
+    // Send a welcome notification immediately
+    fireOSNotification('SAFEX ERP', '🔔 Task notifications are now active!', '📋');
+    startNotifScheduler();
+  } else {
+    showToast('Notifications blocked — check browser settings');
+  }
+}
+
+function updateNotifPermissionUI() {
+  const perm    = ('Notification' in window) ? Notification.permission : 'unavailable';
+  const banner  = document.getElementById('notif-perm-banner');
+  const granted = document.getElementById('notif-perm-granted');
+  if (!banner || !granted) return;
+  if (perm === 'granted') {
+    banner.style.display  = 'none';
+    granted.style.display = '';
+  } else {
+    banner.style.display  = '';
+    granted.style.display = 'none';
+  }
+}
+
+// ── Interval selector ─────────────────────────────────────────
+function setNotifInterval(hours) {
+  const prefs = getNotifPrefs();
+  prefs.interval = hours;
+  localStorage.setItem(NOTIF_PREFS_KEY, JSON.stringify(prefs));
+
+  // Update pill UI
+  [0,1,3,6,12].forEach(h => {
+    const el = document.getElementById('iv-' + h);
+    if (el) el.classList.toggle('active', h === hours);
+  });
+
+  startNotifScheduler(); // restart with new interval
+  showToast(hours === 0 ? 'Task reminders turned off' : `Reminders set every ${hours}h ✓`);
+  updateCountdownDisplay();
+}
+
+// ── Scheduler ─────────────────────────────────────────────────
+function startNotifScheduler() {
+  clearInterval(_notifTimer);
+  clearInterval(_notifCountdown);
+
+  const prefs = getNotifPrefs();
+  if (prefs.interval === 0 || Notification.permission !== 'granted') {
+    document.getElementById('notif-next-info') &&
+      (document.getElementById('notif-next-info').style.display = 'none');
+    return;
+  }
+
+  const ms = prefs.interval * 60 * 60 * 1000;
+  // Record when we last fired; fire immediately if overdue
+  const lastFired = parseInt(localStorage.getItem(NOTIF_LAST_KEY) || '0');
+  const elapsed   = Date.now() - lastFired;
+  const delay     = Math.max(0, ms - elapsed);
+
+  // Fire overdue notification immediately
+  if (delay === 0) fireTaskSummaryNotification();
+
+  // Schedule recurring
+  _notifTimer = setInterval(() => {
+    fireTaskSummaryNotification();
+  }, ms);
+
+  // Start countdown display
+  updateCountdownDisplay();
+  _notifCountdown = setInterval(updateCountdownDisplay, 30000); // update every 30s
+}
+
+function updateCountdownDisplay() {
+  const infoEl = document.getElementById('notif-next-info');
+  const txtEl  = document.getElementById('notif-next-txt');
+  if (!infoEl || !txtEl) return;
+
+  const prefs = getNotifPrefs();
+  if (prefs.interval === 0 || Notification.permission !== 'granted') {
+    infoEl.style.display = 'none';
+    return;
+  }
+
+  infoEl.style.display = '';
+  const lastFired = parseInt(localStorage.getItem(NOTIF_LAST_KEY) || '0');
+  const nextFire  = lastFired + prefs.interval * 60 * 60 * 1000;
+  const remaining = nextFire - Date.now();
+
+  if (remaining <= 0) {
+    txtEl.textContent = 'Notification due soon…';
+    return;
+  }
+
+  const h = Math.floor(remaining / 3600000);
+  const m = Math.floor((remaining % 3600000) / 60000);
+  if (h > 0) {
+    txtEl.textContent = `Next reminder in ${h}h ${m}m`;
+  } else {
+    txtEl.textContent = `Next reminder in ${m} min`;
+  }
+}
+
+// ── Task summary notification ─────────────────────────────────
+function fireTaskSummaryNotification() {
+  if (!CU || Notification.permission !== 'granted') return;
+  const prefs = getNotifPrefs();
+  localStorage.setItem(NOTIF_LAST_KEY, String(Date.now()));
+
+  // Get MY tasks
+  const myTasks = TASKS.filter(t => t.assigneeId === CU.id || t.createdById === CU.id);
+
+  const counts = {
+    pending:  myTasks.filter(t => t.status === 'Pending').length,
+    progress: myTasks.filter(t => t.status === 'In Progress').length,
+    delayed:  myTasks.filter(t => t.status === 'Delayed').length,
+  };
+
+  const parts = [];
+  if (prefs.pending  && counts.pending  > 0) parts.push(`🟡 ${counts.pending} Pending`);
+  if (prefs.progress && counts.progress > 0) parts.push(`🔵 ${counts.progress} In Progress`);
+  if (prefs.delayed  && counts.delayed  > 0) parts.push(`🔴 ${counts.delayed} Delayed`);
+
+  if (!parts.length) return; // nothing to notify about
+
+  const title = 'SAFEX ERP — Task Update';
+  const body  = parts.join('  ·  ') + `\n${myTasks.length} total tasks`;
+
+  fireOSNotification(title, body, counts.delayed > 0 ? '🔴' : '📋');
+}
+
+// ── OS notification dispatcher ────────────────────────────────
+function fireOSNotification(title, body, icon = '📋') {
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
+
+  const options = {
+    body,
+    icon:   localStorage.getItem('sx_logo') || undefined,
+    badge:  localStorage.getItem('sx_logo') || undefined,
+    tag:    'safex-task-summary',   // replaces previous notification of same type
+    renotify: true,
+    silent: false,
+    data:   { url: window.location.href },
+  };
+
+  try {
+    // Use service worker notification if available (shows even when tab is closed)
+    if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({
+        type:    'SHOW_NOTIFICATION',
+        title,
+        options,
+      });
+    } else {
+      // Fallback: browser Notification API (works when tab is open)
+      const n = new Notification(title, options);
+      n.onclick = () => { window.focus(); n.close(); };
+    }
+  } catch(e) {
+    // Last resort: in-app notification
+    addNotif(title + ': ' + body);
+  }
+}
+
+// ── Load prefs into UI ────────────────────────────────────────
+function loadNotifSettingsUI() {
+  const prefs = getNotifPrefs();
+
+  // Interval pills
+  [0,1,3,6,12].forEach(h => {
+    const el = document.getElementById('iv-' + h);
+    if (el) el.classList.toggle('active', h === prefs.interval);
+  });
+
+  // Toggles
+  const fields = ['pending','progress','delayed','assigned','mentions'];
+  fields.forEach(f => {
+    const el = document.getElementById('nt-' + f);
+    if (el) el.checked = prefs[f] !== false; // default true
+  });
+
+  updateNotifPermissionUI();
+  updateCountdownDisplay();
+}
+
+// ── Test notification ─────────────────────────────────────────
+function sendTestNotification() {
+  if (!('Notification' in window)) {
+    showToast('Notifications not supported in this browser');
+    return;
+  }
+  if (Notification.permission !== 'granted') {
+    requestNotifPermission();
+    return;
+  }
+  const myTasks = CU ? TASKS.filter(t => t.assigneeId === CU.id || t.createdById === CU.id) : [];
+  const pending  = myTasks.filter(t => t.status === 'Pending').length;
+  const progress = myTasks.filter(t => t.status === 'In Progress').length;
+  const delayed  = myTasks.filter(t => t.status === 'Delayed').length;
+
+  fireOSNotification(
+    'SAFEX ERP — Test Notification',
+    `🟡 ${pending} Pending  ·  🔵 ${progress} In Progress  ·  🔴 ${delayed} Delayed`,
+    '🔔'
+  );
+  showToast('Test notification sent ✓');
+}
+
+// ── Hook into existing addNotif for assigned/mentions ─────────
+const _origAddNotif = addNotif;
+function addNotif(text) {
+  _origAddNotif(text);
+  // Fire OS notification for assigned + mention events if enabled
+  const prefs = getNotifPrefs();
+  if (Notification.permission !== 'granted') return;
+  const isAssigned = text.includes('assigned') || text.includes('📋');
+  const isMention  = text.includes('mentioned') || text.includes('🔔') || text.includes('🔗');
+  if (isAssigned && prefs.assigned) {
+    fireOSNotification('SAFEX ERP', text.replace(/[📋🔔🔗🔄]/g, '').trim(), '📋');
+  } else if (isMention && prefs.mentions) {
+    fireOSNotification('SAFEX ERP', text.replace(/[📋🔔🔗🔄]/g, '').trim(), '🔔');
+  }
+}
+
+// ── Init on page load ─────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  // Init notification scheduler if already permitted
+  if ('Notification' in window && Notification.permission === 'granted') {
+    startNotifScheduler();
+  }
+});
 </script>
 </body>
+
+<!-- ═══ NOTIFICATION SERVICE WORKER (inline registration) ═══ -->
+<script>
+(function registerNotifSW() {
+  if (!('serviceWorker' in navigator)) return;
+
+  // Inline SW as a Blob — no separate file needed
+  // This SW only handles notification clicks, never intercepts fetch
+  const swCode = `
+self.addEventListener('message', e => {
+  if (e.data && e.data.type === 'SHOW_NOTIFICATION') {
+    self.registration.showNotification(e.data.title, e.data.options || {});
+  }
+});
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  e.waitUntil(clients.matchAll({ type: 'window' }).then(list => {
+    for (const client of list) {
+      if ('focus' in client) return client.focus();
+    }
+    if (clients.openWindow) return clients.openWindow('/');
+  }));
+});
+// CRITICAL: No fetch listener — does NOT intercept GAS API calls
+`;
+
+  const blob = new Blob([swCode], { type: 'application/javascript' });
+  const swUrl = URL.createObjectURL(blob);
+
+  navigator.serviceWorker.register(swUrl, { scope: './' })
+    .then(reg => {
+      console.log('[SAFEX] Notification SW registered');
+      // Revoke object URL after registration
+      setTimeout(() => URL.revokeObjectURL(swUrl), 5000);
+    })
+    .catch(e => {
+      // Blob SW may fail in some browsers due to CSP — silent fallback
+      console.log('[SAFEX] SW registration skipped:', e.message);
+    });
+})();
+</script>
 </html>
