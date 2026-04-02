@@ -1476,7 +1476,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
       </div>
       <div class="user-pill" onclick="userMenu()">
         <div class="u-av" id="u-av">?</div>
-        <span class="u-name" id="u-name">User</span>
+        <span class="u-name" id="topbar-uname">User</span>
       </div>
     </div>
   </div>
@@ -2046,7 +2046,7 @@ function setupUI() {
   const isAdmin = CU.role==='Admin'||isDir;
 
   document.getElementById('u-av').textContent   = CU.name.charAt(0).toUpperCase();
-  document.getElementById('u-name').textContent = CU.name.split(' ')[0];
+  document.getElementById('topbar-uname').textContent = CU.name.split(' ')[0];
 
   document.getElementById('ni-org').style.display   = isDir ? '' : 'none';
   document.getElementById('ni-admin').style.display = isAdmin ? '' : 'none';
