@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0061)https://zeusthetics.github.io/safex-automobile-ERP/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#EE383B">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="SAFEX ERP">
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="https://zeusthetics.github.io/safex-automobile-ERP/manifest.json">
 <title>SAFEX ERP</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════
    SAFEX ERP — Design System v3
@@ -19,60 +19,66 @@
   /* Brand */
   --red:       #EE383B;
   --red-hover: #d42f32;
+  --red-dark:  #b91c1c;
   --red-soft:  rgba(238,56,59,.1);
   --red-border:rgba(238,56,59,.25);
 
-  /* Surface scale — dark charcoal */
-  --bg:        #f4f4f4;       /* page background — soft gray */
-  --surface-0: #ffffff;       /* cards, modals */
-  --surface-1: #f9f9f9;       /* inner panels */
-  --surface-2: #f0f0f0;       /* hover rows, alt rows */
-  --dark-base: #1a1a1a;       /* topbar, sidebar, nav */
-  --dark-mid:  #242424;       /* topbar hover, active nav */
-  --dark-deep: #2d2d2d;       /* borders on dark surfaces */
+  /* Surface scale — light mode */
+  --bg:        #f2f3f5;
+  --surface-0: #ffffff;
+  --surface-1: #f8f9fa;
+  --surface-2: #edf0f3;
+  --dark-base: #141414;
+  --dark-mid:  #1e1e1e;
+  --dark-deep: #2a2a2a;
 
   /* Text */
-  --txt-primary:   #1a1a1a;
-  --txt-secondary: #555555;
-  --txt-muted:     #888888;
-  --txt-on-dark:   #f0f0f0;
-  --txt-on-dark2:  #aaaaaa;
+  --txt-primary:   #111827;
+  --txt-secondary: #4b5563;
+  --txt-muted:     #9ca3af;
+  --txt-on-dark:   #f1f5f9;
+  --txt-on-dark2:  #94a3b8;
 
   /* Borders */
-  --border-light: #e4e4e4;
-  --border-mid:   #d0d0d0;
+  --border-light: #e5e7eb;
+  --border-mid:   #d1d5db;
 
   /* Status colours */
   --pending:  #d97706;
   --progress: #2563eb;
   --done:     #16a34a;
   --delayed:  #EE383B;
+  --green:    #22c55e;
 
   /* Radii */
   --r-sm:  6px;
   --r-md:  10px;
   --r-lg:  14px;
-  --r-xl:  18px;
+  --r-xl:  20px;
 
   /* Typography */
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.05);
-  --shadow-md: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.06);
-  --shadow-lg: 0 12px 32px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.07);
-  --shadow-red:0 4px 18px rgba(238,56,59,.3);
+  /* Shadows — more refined */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.04), 0 1px 4px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.07), 0 1px 4px rgba(0,0,0,.05);
+  --shadow-lg: 0 16px 40px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.06);
+  --shadow-red: 0 4px 20px rgba(238,56,59,.35);
+
+  /* Transitions */
+  --trans-fast: .15s cubic-bezier(.4,0,.2,1);
+  --trans-med:  .25s cubic-bezier(.4,0,.2,1);
 }
 
 /* ── RESET ── */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;background:var(--bg);color:var(--txt-primary);font-family:var(--font-body);overflow:hidden;font-size:14px;-webkit-font-smoothing:antialiased}
+html,body{height:100%;background:var(--bg);color:var(--txt-primary);font-family:var(--font-body);overflow:hidden;font-size:14px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 
 /* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border-mid);border-radius:4px}
+::-webkit-scrollbar-thumb{background:var(--border-mid);border-radius:10px}
 ::-webkit-scrollbar-thumb:hover{background:var(--txt-muted)}
 
 /* ══════════════════════════════════════════════
@@ -81,96 +87,126 @@ html,body{height:100%;background:var(--bg);color:var(--txt-primary);font-family:
 #login-screen{
   position:fixed;inset:0;z-index:100;
   display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,#1a1a1a 0%,#2d2d2d 50%,#1a1a1a 100%);
+  background:radial-gradient(ellipse at 20% 20%, #1e0a0a 0%, #0d0d0d 40%, #000 100%);
   transition:opacity .45s cubic-bezier(.4,0,.2,1),transform .45s cubic-bezier(.4,0,.2,1);
+  overflow:hidden;
+}
+/* animated background glow */
+#login-screen::after{
+  content:'';position:absolute;
+  width:600px;height:600px;
+  background:radial-gradient(circle, rgba(238,56,59,.12) 0%, transparent 70%);
+  top:-100px;left:-100px;
+  border-radius:50%;
+  animation:loginGlow 8s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+@keyframes loginGlow{
+  0%{transform:translate(0,0) scale(1)}
+  100%{transform:translate(200px,150px) scale(1.3)}
 }
 /* subtle grid texture on login */
 #login-screen::before{
   content:'';position:absolute;inset:0;
   background-image:
-    linear-gradient(rgba(238,56,59,.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(238,56,59,.03) 1px,transparent 1px);
-  background-size:40px 40px;
+    linear-gradient(rgba(238,56,59,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(238,56,59,.04) 1px,transparent 1px);
+  background-size:48px 48px;
   pointer-events:none;
+  z-index:0;
 }
 #login-screen.out{opacity:0;pointer-events:none;transform:scale(1.04)}
 
-.login-wrap{width:min(400px,92vw);animation:fadeUp .55s cubic-bezier(.16,1,.3,1);position:relative;z-index:1}
-@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}}
+.login-wrap{width:min(420px,92vw);animation:fadeUp .6s cubic-bezier(.16,1,.3,1);position:relative;z-index:1}
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}}
 
-.login-brand{display:flex;align-items:center;gap:14px;margin-bottom:32px}
+.login-brand{display:flex;align-items:center;gap:16px;margin-bottom:36px}
 .login-logo{
-  width:52px;height:52px;border-radius:var(--r-md);overflow:hidden;
+  width:56px;height:56px;border-radius:14px;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
-  background:var(--red);flex-shrink:0;
-  box-shadow:var(--shadow-red);
+  background:linear-gradient(135deg,#EE383B,#b91c1c);
+  flex-shrink:0;
+  box-shadow:0 8px 28px rgba(238,56,59,.5), 0 0 0 1px rgba(255,255,255,.08);
 }
 .login-logo img{width:100%;height:100%;object-fit:cover}
-.login-logo-fallback{font-weight:800;font-size:20px;color:#fff;letter-spacing:.5px}
-.login-brand-text h1{font-size:26px;font-weight:700;letter-spacing:.3px;color:#ffffff}
-.login-brand-text p{font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.4);letter-spacing:2.5px;text-transform:uppercase;margin-top:3px}
+.login-logo-fallback{font-weight:800;font-size:21px;color:#fff;letter-spacing:.5px}
+.login-brand-text h1{font-size:28px;font-weight:800;letter-spacing:-.3px;color:#ffffff}
+.login-brand-text p{font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.38);letter-spacing:3px;text-transform:uppercase;margin-top:4px}
 
 .login-card{
-  background:rgba(255,255,255,.07);
-  backdrop-filter:blur(20px) saturate(1.2);
-  -webkit-backdrop-filter:blur(20px) saturate(1.2);
-  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(24px) saturate(1.4);
+  -webkit-backdrop-filter:blur(24px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.11);
+  border-top:1px solid rgba(255,255,255,.18);
   border-radius:var(--r-xl);
-  padding:30px;
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
+  padding:32px;
+  box-shadow:0 24px 80px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.08);
 }
-.login-card h2{font-size:18px;font-weight:600;margin-bottom:22px;color:#fff}
+.login-card h2{font-size:17px;font-weight:600;margin-bottom:24px;color:rgba(255,255,255,.9)}
 
-.fl{margin-bottom:16px}
-.fl label{display:block;font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.45);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:7px}
+.fl{margin-bottom:18px}
+.fl label{display:block;font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
 .fi{
-  width:100%;padding:11px 14px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:var(--r-sm);
+  width:100%;padding:12px 15px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r-md);
   color:#fff;font-family:var(--font-body);font-size:14px;
-  outline:none;transition:border-color .2s,background .2s;
+  outline:none;transition:border-color .2s,background .2s,box-shadow .2s;
   -webkit-appearance:none;
 }
-.fi:focus{border-color:rgba(238,56,59,.6);background:rgba(255,255,255,.11)}
-.fi::placeholder{color:rgba(255,255,255,.3)}
+.fi:focus{border-color:rgba(238,56,59,.55);background:rgba(255,255,255,.10);box-shadow:0 0 0 3px rgba(238,56,59,.12)}
+.fi::placeholder{color:rgba(255,255,255,.25)}
 
 .pin-boxes{display:flex;gap:10px;margin-bottom:4px}
 .pin-box{
-  flex:1;height:52px;
-  background:rgba(255,255,255,.07);
-  border:1.5px solid rgba(255,255,255,.15);
-  border-radius:var(--r-sm);
+  flex:1;height:54px;
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.12);
+  border-radius:var(--r-md);
   display:flex;align-items:center;justify-content:center;
-  font-size:20px;font-weight:600;color:rgba(255,255,255,.6);
-  transition:all .15s;
+  font-size:22px;font-weight:700;color:rgba(255,255,255,.5);
+  transition:all .18s cubic-bezier(.4,0,.2,1);
 }
-.pin-box.filled{border-color:var(--red);background:var(--red-soft);color:var(--red)}
+.pin-box.filled{
+  border-color:var(--red);
+  background:rgba(238,56,59,.15);
+  color:var(--red);
+  box-shadow:0 0 12px rgba(238,56,59,.2);
+  transform:scale(1.03);
+}
 
-.numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
 .nb{
   height:52px;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:var(--r-sm);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r-md);
   display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-mono);font-size:16px;font-weight:500;
-  cursor:pointer;transition:all .1s;user-select:none;color:rgba(255,255,255,.85);
+  font-family:var(--font-mono);font-size:17px;font-weight:500;
+  cursor:pointer;transition:all .12s;user-select:none;color:rgba(255,255,255,.8);
 }
-.nb:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.2)}
-.nb:active{background:rgba(238,56,59,.2);border-color:var(--red);transform:scale(.96)}
-.nb.sm{font-size:11px;font-family:var(--font-body);color:rgba(255,255,255,.5)}
+.nb:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.18);color:#fff}
+.nb:active{background:rgba(238,56,59,.22);border-color:rgba(238,56,59,.5);transform:scale(.94);color:var(--red)}
+.nb.sm{font-size:11px;font-family:var(--font-body);color:rgba(255,255,255,.45)}
 
 .btn-login{
-  width:100%;padding:13px;margin-top:16px;
-  background:var(--red);border:none;border-radius:var(--r-md);
-  color:#fff;font-family:var(--font-body);font-size:14px;font-weight:600;
-  letter-spacing:.3px;cursor:pointer;transition:all .2s;
-  box-shadow:var(--shadow-red);
+  width:100%;padding:14px;margin-top:20px;
+  background:linear-gradient(135deg,#EE383B,#c0282a);
+  border:none;border-radius:var(--r-md);
+  color:#fff;font-family:var(--font-body);font-size:14px;font-weight:700;
+  letter-spacing:.5px;text-transform:uppercase;
+  cursor:pointer;transition:all .22s;
+  box-shadow:0 6px 24px rgba(238,56,59,.4), 0 1px 0 rgba(255,255,255,.1) inset;
 }
-.btn-login:hover{background:var(--red-hover);box-shadow:0 6px 24px rgba(238,56,59,.45);transform:translateY(-1px)}
-.btn-login:active{transform:scale(.98);box-shadow:var(--shadow-red)}
-.login-err{color:#ff8a8c;font-family:var(--font-mono);font-size:11px;text-align:center;margin-top:10px;min-height:16px}
+.btn-login:hover{
+  background:linear-gradient(135deg,#f04548,#d42f32);
+  box-shadow:0 8px 32px rgba(238,56,59,.55);
+  transform:translateY(-1px)
+}
+.btn-login:active{transform:scale(.98);box-shadow:0 3px 12px rgba(238,56,59,.35)}
+.login-err{color:#fca5a5;font-family:var(--font-mono);font-size:11px;text-align:center;margin-top:12px;min-height:16px}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 
 /* ══════════════════════════════════════════════
@@ -182,11 +218,11 @@ html,body{height:100%;background:var(--bg);color:var(--txt-primary);font-family:
 /* ── TOP BAR ── */
 .topbar{
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 18px;height:56px;
+  padding:0 18px;height:58px;
   background:var(--dark-base);
-  border-bottom:1px solid var(--dark-deep);
+  border-bottom:1px solid rgba(255,255,255,.06);
   flex-shrink:0;position:relative;z-index:20;
-  box-shadow:0 1px 0 rgba(0,0,0,.3);
+  box-shadow:0 2px 16px rgba(0,0,0,.4);
 }
 .tb-left{display:flex;align-items:center;gap:12px}
 .tb-logo{
@@ -258,10 +294,10 @@ html,body{height:100%;background:var(--bg);color:var(--txt-primary);font-family:
 .bottomnav{
   display:flex;
   background:var(--dark-base);
-  border-top:1px solid var(--dark-deep);
+  border-top:1px solid rgba(255,255,255,.05);
   flex-shrink:0;
   padding-bottom:env(safe-area-inset-bottom);
-  box-shadow:0 -1px 0 rgba(0,0,0,.2);
+  box-shadow:0 -4px 24px rgba(0,0,0,.3);
 }
 .ni{
   flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -285,13 +321,13 @@ html,body{height:100%;background:var(--bg);color:var(--txt-primary);font-family:
 /* ══════════════════════════════════════════════
    PAGES
 ══════════════════════════════════════════════ */
-.page{display:none;padding:20px 16px;animation:fadeUp .22s ease}
+.page{display:none;padding:20px 16px;animation:fadeUp .25s cubic-bezier(.16,1,.3,1)}
 .page.active{display:block}
 
 /* Page header */
-.ph{margin-bottom:20px}
-.ph h1{font-size:22px;font-weight:700;color:var(--txt-primary);letter-spacing:-.3px}
-.ph p{color:var(--txt-muted);font-size:13px;margin-top:3px}
+.ph{margin-bottom:22px}
+.ph h1{font-size:23px;font-weight:800;color:var(--txt-primary);letter-spacing:-.5px}
+.ph p{color:var(--txt-muted);font-size:13px;margin-top:4px}
 
 /* Divider rule */
 .ph-rule{height:1px;background:var(--border-light);margin:0 0 20px}
@@ -299,34 +335,34 @@ html,body{height:100%;background:var(--bg);color:var(--txt-primary);font-family:
 /* ══════════════════════════════════════════════
    STAT CARDS
 ══════════════════════════════════════════════ */
-.stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+.stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:22px}
 @media(min-width:480px){.stats-row{grid-template-columns:repeat(4,1fr)}}
 
 .sc{
   background:var(--surface-0);
   border:1px solid var(--border-light);
-  border-radius:var(--r-md);
+  border-radius:var(--r-lg);
   padding:16px;position:relative;overflow:hidden;
   box-shadow:var(--shadow-sm);
-  transition:box-shadow .2s,transform .2s;
+  transition:box-shadow var(--trans-med),transform var(--trans-med);
 }
-.sc:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
-/* top accent line */
-.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r-md) var(--r-md) 0 0}
-.sc.pend::before{background:var(--pending)}
-.sc.prog::before{background:var(--progress)}
-.sc.done::before{background:var(--done)}
-.sc.delay::before{background:var(--delayed)}
+.sc:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+/* top accent bar */
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r-lg) var(--r-lg) 0 0}
+.sc.pend::before{background:linear-gradient(90deg,var(--pending),#f59e0b)}
+.sc.prog::before{background:linear-gradient(90deg,var(--progress),#3b82f6)}
+.sc.done::before{background:linear-gradient(90deg,var(--done),#22c55e)}
+.sc.delay::before{background:linear-gradient(90deg,var(--delayed),#f87171)}
 
-.sc-n{font-size:30px;font-weight:700;line-height:1;color:var(--txt-primary);margin-top:4px}
+.sc-n{font-size:32px;font-weight:800;line-height:1;color:var(--txt-primary);margin-top:6px;letter-spacing:-.5px}
 .sc-l{
   font-family:var(--font-mono);font-size:9px;
-  color:var(--txt-muted);text-transform:uppercase;letter-spacing:1px;margin-top:5px;
+  color:var(--txt-muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:6px;
 }
-/* colored icon bg in corner */
+/* colored orb in corner */
 .sc::after{
-  content:'';position:absolute;right:-10px;top:-10px;
-  width:56px;height:56px;border-radius:50%;opacity:.06;
+  content:'';position:absolute;right:-12px;top:-12px;
+  width:64px;height:64px;border-radius:50%;opacity:.07;
 }
 .sc.pend::after{background:var(--pending)}
 .sc.prog::after{background:var(--progress)}
@@ -338,21 +374,22 @@ html,body{height:100%;background:var(--bg);color:var(--txt-primary);font-family:
 ══════════════════════════════════════════════ */
 .filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
 .fc{
-  padding:5px 13px;
+  padding:5px 14px;
   background:var(--surface-0);
   border:1px solid var(--border-light);
   border-radius:50px;
   font-family:var(--font-mono);font-size:11px;
   color:var(--txt-secondary);
-  cursor:pointer;transition:all .15s;white-space:nowrap;
+  cursor:pointer;transition:all var(--trans-fast);white-space:nowrap;
   box-shadow:var(--shadow-sm);
 }
-.fc:hover{border-color:var(--border-mid);color:var(--txt-primary)}
+.fc:hover{border-color:var(--border-mid);color:var(--txt-primary);transform:translateY(-1px)}
 .fc.active{
   background:var(--red-soft);
   border-color:var(--red-border);
   color:var(--red);
-  box-shadow:none;
+  box-shadow:0 2px 8px rgba(238,56,59,.12);
+  font-weight:600;
 }
 
 /* Search */
@@ -360,12 +397,12 @@ html,body{height:100%;background:var(--bg);color:var(--txt-primary);font-family:
   display:flex;align-items:center;gap:10px;
   background:var(--surface-0);
   border:1px solid var(--border-light);
-  border-radius:var(--r-md);
+  border-radius:var(--r-lg);
   padding:10px 14px;margin-bottom:14px;
   box-shadow:var(--shadow-sm);
   transition:border-color .2s,box-shadow .2s;
 }
-.search-wrap:focus-within{border-color:rgba(238,56,59,.4);box-shadow:0 0 0 3px var(--red-soft)}
+.search-wrap:focus-within{border-color:rgba(238,56,59,.45);box-shadow:0 0 0 3px var(--red-soft),var(--shadow-sm)}
 .search-wrap svg{width:15px;height:15px;color:var(--txt-muted);flex-shrink:0}
 .search-wrap input{flex:1;background:none;border:none;outline:none;color:var(--txt-primary);font-family:var(--font-body);font-size:14px}
 .search-wrap input::placeholder{color:var(--txt-muted)}
@@ -383,13 +420,13 @@ html,body{height:100%;background:var(--bg);color:var(--txt-primary);font-family:
 .tc{
   background:var(--surface-0);
   border:1px solid var(--border-light);
-  border-radius:var(--r-md);
-  padding:14px 14px 14px 16px;
+  border-radius:var(--r-lg);
+  padding:14px 14px 14px 18px;
   margin-bottom:8px;cursor:pointer;
-  transition:all .18s;position:relative;overflow:hidden;
+  transition:all .2s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;
   box-shadow:var(--shadow-sm);
 }
-.tc:hover{border-color:var(--border-mid);transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.tc:hover{border-color:rgba(238,56,59,.2);transform:translateY(-2px);box-shadow:var(--shadow-md)}
 .tc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:var(--r-md) 0 0 var(--r-md)}
 .tc.hi::before{background:var(--red)}
 .tc.me::before{background:var(--pending)}
@@ -435,23 +472,25 @@ html,body{height:100%;background:var(--bg);color:var(--txt-primary);font-family:
    FAB
 ══════════════════════════════════════════════ */
 .fab{
-  position:fixed;bottom:calc(64px + env(safe-area-inset-bottom) + 16px);right:18px;
-  width:52px;height:52px;
-  background:var(--red);border:none;border-radius:50%;
+  position:fixed;bottom:calc(64px + env(safe-area-inset-bottom) + 18px);right:18px;
+  width:54px;height:54px;
+  background:linear-gradient(135deg,#EE383B,#c0282a);
+  border:none;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  box-shadow:var(--shadow-red);cursor:pointer;font-size:22px;font-weight:300;
-  color:#fff;z-index:40;transition:all .2s;
+  box-shadow:0 6px 24px rgba(238,56,59,.45),0 2px 8px rgba(0,0,0,.2);
+  cursor:pointer;font-size:24px;font-weight:300;
+  color:#fff;z-index:40;transition:all .22s cubic-bezier(.34,1.56,.64,1);
 }
-.fab:hover{background:var(--red-hover);transform:scale(1.08) translateY(-2px);box-shadow:0 8px 28px rgba(238,56,59,.55)}
-.fab:active{transform:scale(.95)}
+.fab:hover{background:linear-gradient(135deg,#f04548,#d42f32);transform:scale(1.1) translateY(-2px);box-shadow:0 10px 36px rgba(238,56,59,.6)}
+.fab:active{transform:scale(.94)}
 
 /* ══════════════════════════════════════════════
    MODALS
 ══════════════════════════════════════════════ */
 .mo{
   position:fixed;inset:0;z-index:200;
-  background:rgba(26,26,26,.65);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   display:flex;align-items:flex-end;justify-content:center;
   opacity:0;pointer-events:none;transition:opacity .25s;
 }
@@ -460,11 +499,12 @@ html,body{height:100%;background:var(--bg);color:var(--txt-primary);font-family:
   width:100%;max-width:620px;max-height:93vh;
   background:var(--surface-0);
   border:1px solid var(--border-light);
-  border-radius:var(--r-xl) var(--r-xl) 0 0;
+  border-top:1px solid rgba(255,255,255,.12);
+  border-radius:24px 24px 0 0;
   overflow:hidden;display:flex;flex-direction:column;
   transform:translateY(100%);
-  transition:transform .32s cubic-bezier(.16,1,.3,1);
-  box-shadow:0 -8px 40px rgba(0,0,0,.15);
+  transition:transform .34s cubic-bezier(.16,1,.3,1);
+  box-shadow:0 -12px 60px rgba(0,0,0,.2);
 }
 .mo.open .mo-box{transform:translateY(0)}
 .mo-handle{width:36px;height:4px;background:var(--border-mid);border-radius:2px;margin:12px auto 0;flex-shrink:0}
@@ -525,12 +565,14 @@ html,body{height:100%;background:var(--bg);color:var(--txt-primary);font-family:
 .fr2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
 
 .btn-p{
-  flex:1;padding:11px;
-  background:var(--red);border:none;border-radius:var(--r-md);
+  flex:1;padding:12px;
+  background:linear-gradient(135deg,#EE383B,#c0282a);
+  border:none;border-radius:var(--r-md);
   color:#fff;font-family:var(--font-body);font-size:14px;font-weight:600;
   cursor:pointer;transition:all .2s;
+  box-shadow:0 2px 8px rgba(238,56,59,.3);
 }
-.btn-p:hover{background:var(--red-hover);box-shadow:var(--shadow-red)}
+.btn-p:hover{background:linear-gradient(135deg,#f04548,#d42f32);box-shadow:var(--shadow-red);transform:translateY(-1px)}
 .btn-s{
   flex:1;padding:11px;
   background:var(--surface-0);
@@ -554,12 +596,12 @@ html,body{height:100%;background:var(--bg);color:var(--txt-primary);font-family:
 .mb{
   background:var(--surface-0);
   border:1px solid var(--border-light);
-  border-radius:var(--r-md);
+  border-radius:var(--r-lg);
   margin-bottom:10px;overflow:hidden;
   box-shadow:var(--shadow-sm);
-  transition:box-shadow .2s;
+  transition:box-shadow var(--trans-med),transform var(--trans-med);
 }
-.mb:hover{box-shadow:var(--shadow-md)}
+.mb:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
 .mb-head{
   display:flex;align-items:center;justify-content:space-between;
   padding:14px 16px;cursor:pointer;transition:background .15s;
@@ -686,12 +728,12 @@ tbody tr:hover td{background:var(--surface-2)!important;transition:background .1
 .site-card{
   background:var(--surface-0);
   border:1px solid var(--border-light);
-  border-radius:var(--r-md);
+  border-radius:var(--r-lg);
   padding:14px 16px;margin-bottom:8px;
   display:flex;align-items:center;gap:14px;
-  transition:all .18s;box-shadow:var(--shadow-sm);
+  transition:all .2s cubic-bezier(.4,0,.2,1);box-shadow:var(--shadow-sm);
 }
-.site-card:hover{border-color:var(--border-mid);transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.site-card:hover{border-color:rgba(238,56,59,.2);transform:translateY(-2px);box-shadow:var(--shadow-md)}
 .site-icon{
   width:40px;height:40px;
   background:var(--surface-1);
@@ -750,15 +792,17 @@ tbody tr:hover td{background:var(--surface-2)!important;transition:background .1
 .empty small{font-family:var(--font-mono);font-size:11px}
 
 .toast{
-  position:fixed;bottom:calc(74px + env(safe-area-inset-bottom));left:50%;
-  transform:translateX(-50%) translateY(14px);
-  background:var(--dark-base);
-  border-radius:var(--r-md);
-  padding:10px 20px;font-size:13px;font-weight:500;
+  position:fixed;bottom:calc(80px + env(safe-area-inset-bottom));left:50%;
+  transform:translateX(-50%) translateY(16px);
+  background:rgba(20,20,20,.95);
+  backdrop-filter:blur(12px);
+  border-radius:50px;
+  padding:10px 22px;font-size:13px;font-weight:500;
   color:#fff;z-index:500;
-  opacity:0;transition:all .28s;pointer-events:none;
-  white-space:nowrap;box-shadow:var(--shadow-lg);
-  border:1px solid rgba(255,255,255,.08);
+  opacity:0;transition:all .3s cubic-bezier(.16,1,.3,1);pointer-events:none;
+  white-space:nowrap;
+  box-shadow:0 8px 32px rgba(0,0,0,.3),0 2px 8px rgba(0,0,0,.2);
+  border:1px solid rgba(255,255,255,.1);
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
@@ -805,7 +849,7 @@ tbody tr:hover td{background:var(--surface-2)!important;transition:background .1
   margin-bottom:12px;display:flex;align-items:center;gap:8px;
 }
 .notif-permission-banner{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  display:flex;align-items:center;justify-content:space-between;
   padding:12px 14px;
   background:rgba(238,56,59,.06);
   border:1px solid var(--red-border);
@@ -1163,18 +1207,21 @@ body.dark .gem-no-key{background:rgba(244,180,0,.06);border-color:rgba(244,180,0
    DARK MODE — body.dark overrides :root
 ══════════════════════════════════════════════ */
 body.dark {
-  --bg:          #0f0f0f;
-  --surface-0:   #1a1a1a;
-  --surface-1:   #222222;
-  --surface-2:   #2a2a2a;
-  --border-light:#2e2e2e;
-  --border-mid:  #3a3a3a;
+  --bg:          #0a0a0a;
+  --surface-0:   #141414;
+  --surface-1:   #1c1c1c;
+  --surface-2:   #242424;
+  --border-light:#262626;
+  --border-mid:  #333333;
   --txt-primary: #f0f0f0;
-  --txt-secondary:#b0b0b0;
-  --txt-muted:   #6a6a6a;
-  --dark-base:   #111111;
-  --dark-mid:    #1c1c1c;
-  --dark-deep:   #2a2a2a;
+  --txt-secondary:#a8a8a8;
+  --txt-muted:   #5a5a5a;
+  --dark-base:   #0d0d0d;
+  --dark-mid:    #181818;
+  --dark-deep:   #222222;
+  --shadow-sm:   0 1px 2px rgba(0,0,0,.2), 0 1px 4px rgba(0,0,0,.15);
+  --shadow-md:   0 4px 16px rgba(0,0,0,.3), 0 1px 4px rgba(0,0,0,.2);
+  --shadow-lg:   0 16px 40px rgba(0,0,0,.4), 0 4px 12px rgba(0,0,0,.25);
 }
 body.dark .login-card {
   background:rgba(255,255,255,.06);
@@ -1411,10 +1458,10 @@ body.dark .tt-icon.sun  { color:rgba(255,255,255,.35); }
 body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
 </style>
 </head>
-<body>
+<body class="dark">
 
 <!-- ═══ LOGIN ═══ -->
-<div id="login-screen">
+<div id="login-screen" class="">
   <div class="login-wrap">
     <div class="login-brand">
       <div class="login-logo" id="login-logo-wrap">
@@ -1443,7 +1490,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
           <div class="nb" onclick="np(1)">1</div><div class="nb" onclick="np(2)">2</div><div class="nb" onclick="np(3)">3</div>
           <div class="nb" onclick="np(4)">4</div><div class="nb" onclick="np(5)">5</div><div class="nb" onclick="np(6)">6</div>
           <div class="nb" onclick="np(7)">7</div><div class="nb" onclick="np(8)">8</div><div class="nb" onclick="np(9)">9</div>
-          <div class="nb sm" onclick="np('c')">CLR</div><div class="nb" onclick="np(0)">0</div><div class="nb sm" onclick="np('d')">⌫</div>
+          <div class="nb sm" onclick="np(&#39;c&#39;)">CLR</div><div class="nb" onclick="np(0)">0</div><div class="nb sm" onclick="np(&#39;d&#39;)">⌫</div>
         </div>
       </div>
       <button class="btn-login" onclick="doLogin()">SIGN IN →</button>
@@ -1453,7 +1500,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
 </div>
 
 <!-- ═══ APP ═══ -->
-<div id="app">
+<div id="app" class="">
   <div class="topbar">
     <div class="tb-left">
       <div class="tb-logo" id="tb-logo-wrap"><span class="tb-logo-fb" id="tb-logo-fb">SX</span></div>
@@ -1461,7 +1508,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
     </div>
     <div class="tb-right">
       <div class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle day/night">
-        <div class="tt-track" id="tt-track">
+        <div class="tt-track night" id="tt-track">
           <div class="tt-thumb" id="tt-thumb"></div>
         </div>
         <div class="tt-icons">
@@ -1471,12 +1518,12 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
       </div>
       <div class="save-indicator" id="save-ind"><div class="si-dot"></div><span id="save-txt">Synced</span></div>
       <div class="notif-btn" onclick="toggleNotifPanel()" id="notif-btn">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
         <div class="notif-badge" id="notif-badge" style="display:none">0</div>
       </div>
       <div class="user-pill" onclick="userMenu()">
-        <div class="u-av" id="u-av">?</div>
-        <span class="u-name" id="topbar-uname">User</span>
+        <div class="u-av" id="u-av">R</div>
+        <span class="u-name" id="topbar-uname">Rishit</span>
       </div>
     </div>
   </div>
@@ -1485,24 +1532,27 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
     <!-- MY TASKS -->
     <div class="page active" id="p-tasks">
       <div class="ph"><h1 id="tasks-h">My Tasks</h1><p id="tasks-sub">Your tasks</p></div>
-      <div class="stats-row" id="my-stats"></div>
-      <div id="dir-filters" style="display:none">
+      <div class="stats-row" id="my-stats">
+    <div class="sc pend"><div class="sc-n">0</div><div class="sc-l">Pending</div></div>
+    <div class="sc prog"><div class="sc-n">0</div><div class="sc-l">In Progress</div></div>
+    <div class="sc done"><div class="sc-n">0</div><div class="sc-l">Completed</div></div>
+    <div class="sc delay"><div class="sc-n">0</div><div class="sc-l">Delayed</div></div></div>
+      <div id="dir-filters" style="">
         <div class="filters" id="status-filters">
-          <div class="fc active" onclick="setF(this,'status','all')">All Status</div>
-          <div class="fc" onclick="setF(this,'status','Pending')">Pending</div>
-          <div class="fc" onclick="setF(this,'status','In Progress')">In Progress</div>
-          <div class="fc" onclick="setF(this,'status','Completed')">Completed</div>
-          <div class="fc" onclick="setF(this,'status','Delayed')">Delayed</div>
+          <div class="fc active" onclick="setF(this,&#39;status&#39;,&#39;all&#39;)">All Status</div>
+          <div class="fc" onclick="setF(this,&#39;status&#39;,&#39;Pending&#39;)">Pending</div>
+          <div class="fc" onclick="setF(this,&#39;status&#39;,&#39;In Progress&#39;)">In Progress</div>
+          <div class="fc" onclick="setF(this,&#39;status&#39;,&#39;Completed&#39;)">Completed</div>
+          <div class="fc" onclick="setF(this,&#39;status&#39;,&#39;Delayed&#39;)">Delayed</div>
         </div>
-        <div class="filters" id="dept-filters"></div>
+        <div class="filters" id="dept-filters"><div class="fc active" data-dept="all">All Depts</div></div>
       </div>
       <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center">
         <div class="search-wrap" style="flex:1;min-width:160px;margin-bottom:0">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
           <input type="text" placeholder="Search tasks…" id="task-q" oninput="debounceSearch()">
         </div>
-        <select class="fsl" id="sort-sel" onchange="setSort(this.value)"
-          style="width:auto;padding:9px 32px 9px 12px;font-size:13px;background:var(--surface-0);border:1px solid var(--border-light);border-radius:var(--r-md);flex-shrink:0;cursor:pointer">
+        <select class="fsl" id="sort-sel" onchange="setSort(this.value)" style="width:auto;padding:9px 32px 9px 12px;font-size:13px;background:var(--surface-0);border:1px solid var(--border-light);border-radius:var(--r-md);flex-shrink:0;cursor:pointer">
           <option value="date-desc">↓ Newest first</option>
           <option value="date-asc">↑ Oldest first</option>
           <option value="status">By Status</option>
@@ -1511,23 +1561,23 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
           <option value="updated">Recently Updated</option>
         </select>
         <div class="view-toggle">
-          <button class="vt-btn" id="vt-table" onclick="setView('table')" title="Table view">⊞</button>
-          <button class="vt-btn" id="vt-cards" onclick="setView('cards')" title="Card view">☰</button>
+          <button class="vt-btn active" id="vt-table" onclick="setView(&#39;table&#39;)" title="Table view">⊞</button>
+          <button class="vt-btn" id="vt-cards" onclick="setView(&#39;cards&#39;)" title="Card view">☰</button>
         </div>
       </div>
-      <div id="task-list"></div>
+      <div id="task-list"><div class="empty"><div class="ei">✅</div><p>No tasks found</p><small>Tap + to add a task</small></div></div>
     </div>
 
     <!-- ORG -->
     <div class="page" id="p-org">
-      <div class="ph"><h1>Organisation</h1><p>All members & tasks</p></div>
+      <div class="ph"><h1>Organisation</h1><p>All members &amp; tasks</p></div>
       <div class="stats-row" id="org-stats"></div>
       <div class="filters" id="org-filters">
-        <div class="fc active" onclick="setOF(this,'all')">All</div>
-        <div class="fc" onclick="setOF(this,'Delayed')">🔴 Delayed</div>
-        <div class="fc" onclick="setOF(this,'In Progress')">🔵 In Progress</div>
-        <div class="fc" onclick="setOF(this,'Pending')">🟡 Pending</div>
-        <div class="fc" onclick="setOF(this,'Completed')">🟢 Done</div>
+        <div class="fc active" onclick="setOF(this,&#39;all&#39;)">All</div>
+        <div class="fc" onclick="setOF(this,&#39;Delayed&#39;)">🔴 Delayed</div>
+        <div class="fc" onclick="setOF(this,&#39;In Progress&#39;)">🔵 In Progress</div>
+        <div class="fc" onclick="setOF(this,&#39;Pending&#39;)">🟡 Pending</div>
+        <div class="fc" onclick="setOF(this,&#39;Completed&#39;)">🟢 Done</div>
       </div>
       <div id="org-list"></div>
     </div>
@@ -1539,7 +1589,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
         <div class="chat-input-bar">
           <textarea class="chat-ta" id="chat-in" placeholder="Message… use @name to tag" rows="1" oninput="autoResize(this)" onkeydown="chatKey(event)"></textarea>
           <button class="chat-send" onclick="sendChat()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
           </button>
         </div>
       </div>
@@ -1547,8 +1597,8 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
 
     <!-- WEBSITES -->
     <div class="page" id="p-sites">
-      <div class="ph"><h1>Resources</h1><p>Company websites & links</p></div>
-      <div class="section-btn" id="add-site-btn" style="display:none">
+      <div class="ph"><h1>Resources</h1><p>Company websites &amp; links</p></div>
+      <div class="section-btn" id="add-site-btn" style="">
         <button class="btn-sm" onclick="openSiteModal()">+ Add Website</button>
       </div>
       <div id="sites-list"></div>
@@ -1556,7 +1606,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
 
     <!-- ADMIN -->
     <div class="page" id="p-admin">
-      <div class="ph"><h1>Admin Panel</h1><p>Manage employees & settings</p></div>
+      <div class="ph"><h1>Admin Panel</h1><p>Manage employees &amp; settings</p></div>
       <div class="section-btn"><button class="btn-sm" onclick="openAddUser()">+ Add Employee</button></div>
       <div id="admin-tbl"></div>
       <div class="settings-section">
@@ -1641,9 +1691,9 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
               <span class="ip-val">12</span><span class="ip-lbl">hours</span>
             </div>
           </div>
-          <div class="notif-next-info" id="notif-next-info" style="display:none">
+          <div class="notif-next-info" id="notif-next-info" style="">
             <div class="notif-next-dot"></div>
-            <span id="notif-next-txt">Next notification in …</span>
+            <span id="notif-next-txt">Next reminder in 59 min</span>
           </div>
         </div>
 
@@ -1656,7 +1706,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
               <div class="nts">Tasks not yet started</div>
             </div>
             <label class="tgl-wrap">
-              <input type="checkbox" class="tgl-inp" id="nt-pending" onchange="saveNotifPrefs()" checked>
+              <input type="checkbox" class="tgl-inp" id="nt-pending" onchange="saveNotifPrefs()" checked="">
               <span class="tgl-slider"></span>
             </label>
           </div>
@@ -1666,7 +1716,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
               <div class="nts">Tasks currently being worked on</div>
             </div>
             <label class="tgl-wrap">
-              <input type="checkbox" class="tgl-inp" id="nt-progress" onchange="saveNotifPrefs()" checked>
+              <input type="checkbox" class="tgl-inp" id="nt-progress" onchange="saveNotifPrefs()" checked="">
               <span class="tgl-slider"></span>
             </label>
           </div>
@@ -1676,7 +1726,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
               <div class="nts">Overdue or marked as delayed</div>
             </div>
             <label class="tgl-wrap">
-              <input type="checkbox" class="tgl-inp" id="nt-delayed" onchange="saveNotifPrefs()" checked>
+              <input type="checkbox" class="tgl-inp" id="nt-delayed" onchange="saveNotifPrefs()" checked="">
               <span class="tgl-slider"></span>
             </label>
           </div>
@@ -1686,7 +1736,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
               <div class="nts">When Director assigns you a task</div>
             </div>
             <label class="tgl-wrap">
-              <input type="checkbox" class="tgl-inp" id="nt-assigned" onchange="saveNotifPrefs()" checked>
+              <input type="checkbox" class="tgl-inp" id="nt-assigned" onchange="saveNotifPrefs()" checked="">
               <span class="tgl-slider"></span>
             </label>
           </div>
@@ -1696,7 +1746,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
               <div class="nts">When someone tags you or marks you as a blocker</div>
             </div>
             <label class="tgl-wrap">
-              <input type="checkbox" class="tgl-inp" id="nt-mentions" onchange="saveNotifPrefs()" checked>
+              <input type="checkbox" class="tgl-inp" id="nt-mentions" onchange="saveNotifPrefs()" checked="">
               <span class="tgl-slider"></span>
             </label>
           </div>
@@ -1712,21 +1762,21 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
   </div>
 
   <nav class="bottomnav" id="bottomnav">
-    <div class="ni active" id="ni-tasks" onclick="go('tasks')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12l3 3 5-5"/></svg>Tasks
+    <div class="ni active" id="ni-tasks" onclick="go(&#39;tasks&#39;)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M8 12l3 3 5-5"></path></svg>Tasks
     </div>
-    <div class="ni" id="ni-org" onclick="go('org')" style="display:none">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="7" r="3"/><path d="M5.5 20c0-3.5 2.9-6 6.5-6s6.5 2.5 6.5 6"/><circle cx="4" cy="12" r="2"/><path d="M2 20c0-2.2 1.8-4 4-4"/><circle cx="20" cy="12" r="2"/><path d="M20 16c2.2 0 4 1.8 4 4h-4"/></svg>Org
+    <div class="ni" id="ni-org" onclick="go(&#39;org&#39;)" style="">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="7" r="3"></circle><path d="M5.5 20c0-3.5 2.9-6 6.5-6s6.5 2.5 6.5 6"></path><circle cx="4" cy="12" r="2"></circle><path d="M2 20c0-2.2 1.8-4 4-4"></path><circle cx="20" cy="12" r="2"></circle><path d="M20 16c2.2 0 4 1.8 4 4h-4"></path></svg>Org
     </div>
-    <div class="ni" id="ni-chat" onclick="go('chat')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat
+    <div class="ni" id="ni-chat" onclick="go(&#39;chat&#39;)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Chat
       <div class="ni-badge" id="chat-badge" style="display:none">0</div>
     </div>
-    <div class="ni" id="ni-sites" onclick="go('sites')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Sites
+    <div class="ni" id="ni-sites" onclick="go(&#39;sites&#39;)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Sites
     </div>
-    <div class="ni" id="ni-admin" onclick="go('admin')" style="display:none">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>Admin
+    <div class="ni" id="ni-admin" onclick="go(&#39;admin&#39;)" style="">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"></circle><path d="M20 21a8 8 0 1 0-16 0"></path></svg>Admin
     </div>
   </nav>
 </div>
@@ -1744,7 +1794,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
 <div class="mo" id="task-mo">
   <div class="mo-box">
     <div class="mo-handle"></div>
-    <div class="mo-head"><div class="mo-title" id="tm-title">Add Task</div><div class="mo-close" onclick="closeMo('task-mo')">✕</div></div>
+    <div class="mo-head"><div class="mo-title" id="tm-title">Add Task</div><div class="mo-close" onclick="closeMo(&#39;task-mo&#39;)">✕</div></div>
     <div class="mo-body">
       <input type="hidden" id="f-id">
       <div class="fr"><label>Task Title *</label><input type="text" class="fi2" id="f-title" placeholder="Brief task title"></div>
@@ -1763,7 +1813,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
       <div class="fr"><label>Remarks / @mention others</label><textarea class="fta" id="f-remark" placeholder="Notes… use @name to tag someone"></textarea></div>
     </div>
     <div class="mo-foot">
-      <button class="btn-s" onclick="closeMo('task-mo')">Cancel</button>
+      <button class="btn-s" onclick="closeMo(&#39;task-mo&#39;)">Cancel</button>
       <button class="btn-d" id="del-task-btn" style="display:none" onclick="delTask()">Delete</button>
       <button class="btn-p" onclick="saveTask()">Save Task</button>
     </div>
@@ -1773,7 +1823,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
 <div class="mo" id="user-mo">
   <div class="mo-box">
     <div class="mo-handle"></div>
-    <div class="mo-head"><div class="mo-title" id="um-title">Add Employee</div><div class="mo-close" onclick="closeMo('user-mo')">✕</div></div>
+    <div class="mo-head"><div class="mo-title" id="um-title">Add Employee</div><div class="mo-close" onclick="closeMo(&#39;user-mo&#39;)">✕</div></div>
     <div class="mo-body">
       <input type="hidden" id="u-id">
       <div class="fr2">
@@ -1789,7 +1839,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
       <div class="fr"><label>PIN (4 digits) *</label><input type="password" class="fi2" id="u-pin" placeholder="4-digit PIN" maxlength="4" inputmode="numeric"></div>
     </div>
     <div class="mo-foot">
-      <button class="btn-s" onclick="closeMo('user-mo')">Cancel</button>
+      <button class="btn-s" onclick="closeMo(&#39;user-mo&#39;)">Cancel</button>
       <button class="btn-d" id="del-user-btn" style="display:none" onclick="delUser()">Remove</button>
       <button class="btn-p" onclick="saveUser()">Save</button>
     </div>
@@ -1799,7 +1849,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
 <div class="mo" id="site-mo">
   <div class="mo-box">
     <div class="mo-handle"></div>
-    <div class="mo-head"><div class="mo-title" id="sm-title">Add Website</div><div class="mo-close" onclick="closeMo('site-mo')">✕</div></div>
+    <div class="mo-head"><div class="mo-title" id="sm-title">Add Website</div><div class="mo-close" onclick="closeMo(&#39;site-mo&#39;)">✕</div></div>
     <div class="mo-body">
       <input type="hidden" id="s-id">
       <div class="fr"><label>Site Name *</label><input type="text" class="fi2" id="s-name" placeholder="e.g. NFPA Standards"></div>
@@ -1808,7 +1858,7 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
       <div class="fr"><label>Description</label><input type="text" class="fi2" id="s-desc" placeholder="Short description"></div>
     </div>
     <div class="mo-foot">
-      <button class="btn-s" onclick="closeMo('site-mo')">Cancel</button>
+      <button class="btn-s" onclick="closeMo(&#39;site-mo&#39;)">Cancel</button>
       <button class="btn-d" id="del-site-btn" style="display:none" onclick="delSite()">Delete</button>
       <button class="btn-p" onclick="saveSite()">Save</button>
     </div>
@@ -1816,11 +1866,11 @@ body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
 </div>
 
 <!-- FAB -->
-<button class="fab" id="fab" onclick="taskViewMode==='table' ? addInlineRow() : openAddTask()" title="Add task">+</button>
+<button class="fab" id="fab" onclick="taskViewMode===&#39;table&#39; ? addInlineRow() : openAddTask()" title="Add task">+</button>
 
 <!-- SPINNER -->
 <div class="spin-ov" id="spinner"><div class="spin"></div><div class="spin-txt" id="spin-txt">Loading…</div></div>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast">Loaded in offline mode</div>
 
 <script>
 'use strict';
@@ -3602,11 +3652,11 @@ async function sendGemini() {
 </script>
 
 <!-- ═══ GEMINI FLOATING BUTTON ═══ -->
-<button class="gem-fab" id="gem-fab" onclick="openGemini()" title="Ask Gemini AI" style="display:none">
+<button class="gem-fab" id="gem-fab" onclick="openGemini()" title="Ask Gemini AI" style="">
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="rgba(255,255,255,0.2)"/>
-    <path d="M12 3.5c4.5 0 7.5 4 6 8.5-1 3-4 5-6 5s-5-2-6-5c-1.5-4.5 1.5-8.5 6-8.5z" fill="rgba(255,255,255,0.9)"/>
-    <ellipse cx="12" cy="12" rx="3" ry="5" fill="rgba(255,255,255,0.4)"/>
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="rgba(255,255,255,0.2)"></path>
+    <path d="M12 3.5c4.5 0 7.5 4 6 8.5-1 3-4 5-6 5s-5-2-6-5c-1.5-4.5 1.5-8.5 6-8.5z" fill="rgba(255,255,255,0.9)"></path>
+    <ellipse cx="12" cy="12" rx="3" ry="5" fill="rgba(255,255,255,0.4)"></ellipse>
   </svg>
 </button>
 
@@ -3621,9 +3671,9 @@ async function sendGemini() {
       <div class="gem-head-left">
         <div class="gem-logo">
           <svg viewBox="0 0 24 24" fill="none">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="rgba(255,255,255,0.3)"/>
-            <path d="M12 4c4 0 6.5 3.5 5.5 7.5C16.7 14.5 14.5 16 12 16s-4.7-1.5-5.5-4.5C5.5 7.5 8 4 12 4z" fill="white"/>
-            <ellipse cx="12" cy="12" rx="2.5" ry="4" fill="rgba(66,133,244,0.5)"/>
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="rgba(255,255,255,0.3)"></path>
+            <path d="M12 4c4 0 6.5 3.5 5.5 7.5C16.7 14.5 14.5 16 12 16s-4.7-1.5-5.5-4.5C5.5 7.5 8 4 12 4z" fill="white"></path>
+            <ellipse cx="12" cy="12" rx="2.5" ry="4" fill="rgba(66,133,244,0.5)"></ellipse>
           </svg>
         </div>
         <div class="gem-head-text">
@@ -3632,7 +3682,7 @@ async function sendGemini() {
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
-        <div id="gem-clear-btn" onclick="clearGeminiChat()" style="font-family:var(--font-mono);font-size:10px;color:var(--txt-muted);cursor:pointer;padding:4px 8px;border-radius:4px;border:1px solid var(--border-light);transition:all .15s" onmouseover="this.style.color='var(--txt-primary)'" onmouseout="this.style.color='var(--txt-muted)'">Clear</div>
+        <div id="gem-clear-btn" onclick="clearGeminiChat()" style="font-family:var(--font-mono);font-size:10px;color:var(--txt-muted);cursor:pointer;padding:4px 8px;border-radius:4px;border:1px solid var(--border-light);transition:all .15s" onmouseover="this.style.color=&#39;var(--txt-primary)&#39;" onmouseout="this.style.color=&#39;var(--txt-muted)&#39;">Clear</div>
         <div class="gem-close" onclick="closeGemini()">✕</div>
       </div>
     </div>
@@ -3657,8 +3707,8 @@ async function sendGemini() {
       <div class="gem-welcome" id="gem-welcome">
         <div class="gem-welcome-icon">
           <svg viewBox="0 0 24 24" fill="none">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="rgba(255,255,255,0.3)"/>
-            <path d="M12 4c4 0 6.5 3.5 5.5 7.5C16.7 14.5 14.5 16 12 16s-4.7-1.5-5.5-4.5C5.5 7.5 8 4 12 4z" fill="white"/>
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="rgba(255,255,255,0.3)"></path>
+            <path d="M12 4c4 0 6.5 3.5 5.5 7.5C16.7 14.5 14.5 16 12 16s-4.7-1.5-5.5-4.5C5.5 7.5 8 4 12 4z" fill="white"></path>
           </svg>
         </div>
         <h4>Hi, I'm Gemini ✨</h4>
@@ -3670,15 +3720,11 @@ async function sendGemini() {
     <div class="gem-disclaimer" id="gem-disclaimer">Gemini may make mistakes. Verify important information.</div>
     <div class="gem-input-bar">
       <div class="gem-input-wrap">
-        <textarea class="gem-ta" id="gem-input"
-          placeholder="Ask anything about your tasks or fire safety…"
-          rows="1"
-          oninput="gemAutoResize(this)"
-          onkeydown="gemKey(event)"></textarea>
+        <textarea class="gem-ta" id="gem-input" placeholder="Ask anything about your tasks or fire safety…" rows="1" oninput="gemAutoResize(this)" onkeydown="gemKey(event)"></textarea>
       </div>
       <button class="gem-send-btn" id="gem-send" onclick="sendGemini()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          <line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
         </svg>
       </button>
     </div>
@@ -3980,9 +4026,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
-</body>
 
-<!-- ═══ NOTIFICATION SERVICE WORKER (inline registration) ═══ -->
+
+
 <script>
 (function registerNotifSW() {
   if (!('serviceWorker' in navigator)) return;
@@ -4022,4 +4068,5 @@ self.addEventListener('notificationclick', e => {
     });
 })();
 </script>
-</html>
+
+</body><!-- ═══ NOTIFICATION SERVICE WORKER (inline registration) ═══ --></html>
