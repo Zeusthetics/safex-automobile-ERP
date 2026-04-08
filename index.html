@@ -1456,6 +1456,320 @@ body.dark .tt-status-sel.st-delayed   { background:rgba(238,56,59,.2);color:#f87
 .tt-icon.moon { color:rgba(255,255,255,.35); }
 body.dark .tt-icon.sun  { color:rgba(255,255,255,.35); }
 body.dark .tt-icon.moon { color:rgba(238,56,59,.9); }
+
+/* ═══════════════════════════════════════════════
+   SAFEX ERP — Motion & UX Enhancement Layer v3
+═══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap');
+
+:root {
+  --font-body:    'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-display: 'Syne', sans-serif;
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --red:          #EE383B;
+  --red-dim:      rgba(238,56,59,.15);
+  --red-glow:     0 0 24px rgba(238,56,59,.35), 0 0 60px rgba(238,56,59,.12);
+}
+
+/* ── Fonts ────────────────────────────────────────────── */
+html, body { font-family: var(--font-body) !important; }
+
+/* ── Topbar ───────────────────────────────────────────── */
+.topbar {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a0808 50%, #0f0f0f 100%) !important;
+  border-bottom: 1px solid rgba(238,56,59,.2) !important;
+  box-shadow: 0 1px 0 rgba(238,56,59,.12), 0 4px 24px rgba(0,0,0,.5) !important;
+}
+.topbar::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #EE383B 30%, #ff8f8f 50%, #EE383B 70%, transparent 100%);
+  opacity: 0.65;
+}
+
+/* ── Content area background (dot grid) ──────────────── */
+#content {
+  background-image:
+    radial-gradient(circle, rgba(238,56,59,.06) 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
+  background-position: 0 0 !important;
+}
+
+/* ── Page heading ─────────────────────────────────────── */
+.ph h1 {
+  font-family: var(--font-display) !important;
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  letter-spacing: -1px !important;
+  position: relative !important;
+  padding-left: 14px !important;
+}
+.ph h1::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8%; bottom: 8%;
+  width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(to bottom, #EE383B, #ff6b6d, #EE383B);
+  box-shadow: 0 0 12px rgba(238,56,59,.5);
+  animation: borderGlow 2.5s ease-in-out infinite;
+}
+@keyframes borderGlow {
+  0%,100% { opacity:1; } 50% { opacity:.5; }
+}
+.ph p { font-size: 12px !important; opacity: .55 !important; padding-left: 14px !important; }
+
+/* ── Stat cards ───────────────────────────────────────── */
+.sc {
+  background: linear-gradient(145deg, var(--surface-0) 0%, rgba(255,255,255,.02) 100%) !important;
+  border: 1px solid rgba(255,255,255,.07) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.05) !important;
+  transition: transform .3s var(--ease-spring), box-shadow .3s !important;
+  will-change: transform;
+}
+.sc:hover {
+  transform: translateY(-6px) scale(1.02) !important;
+  box-shadow: 0 18px 48px rgba(0,0,0,.3), 0 0 0 1px rgba(238,56,59,.2), inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+
+/* Stat card orb — bigger + glowing */
+.sc::after {
+  width: 80px !important; height: 80px !important;
+  opacity: 0.18 !important;
+  filter: blur(2px) !important;
+  right: -16px !important; top: -16px !important;
+}
+.sc.pend::after { box-shadow: 0 0 30px rgba(238,56,59,.5) !important; }
+.sc.prog::after { box-shadow: 0 0 30px rgba(59,130,246,.5) !important; }
+.sc.done::after { box-shadow: 0 0 30px rgba(34,197,94,.5) !important; }
+.sc.delay::after { box-shadow: 0 0 30px rgba(245,158,11,.5) !important; }
+
+/* Gradient text numbers */
+.sc-n {
+  font-family: var(--font-display) !important;
+  font-size: 38px !important; font-weight: 800 !important;
+  letter-spacing: -1.5px !important;
+  background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,.65) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.sc.pend { border-color: rgba(238,56,59,.22) !important; background: linear-gradient(145deg, rgba(238,56,59,.07) 0%, var(--surface-0) 60%) !important; }
+.sc.pend .sc-n { background: linear-gradient(135deg, #ff7e7e, #EE383B); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.sc.prog { border-color: rgba(59,130,246,.22) !important; background: linear-gradient(145deg, rgba(59,130,246,.07) 0%, var(--surface-0) 60%) !important; }
+.sc.prog .sc-n { background: linear-gradient(135deg, #93c5fd, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.sc.done { border-color: rgba(34,197,94,.22) !important; background: linear-gradient(145deg, rgba(34,197,94,.07) 0%, var(--surface-0) 60%) !important; }
+.sc.done .sc-n { background: linear-gradient(135deg, #86efac, #22c55e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.sc.delay { border-color: rgba(245,158,11,.22) !important; background: linear-gradient(145deg, rgba(245,158,11,.07) 0%, var(--surface-0) 60%) !important; }
+.sc.delay .sc-n { background: linear-gradient(135deg, #fcd34d, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.sc-l { font-family: var(--font-body) !important; font-size: 10px !important; font-weight: 600 !important; letter-spacing: 2px !important; opacity: .5 !important; margin-top: 8px !important; }
+
+/* Stat card stagger entrance */
+@keyframes cardIn {
+  from { opacity:0; transform:translateY(28px) scale(.94); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+.sc:nth-child(1){animation:cardIn .5s var(--ease-out) .05s both}
+.sc:nth-child(2){animation:cardIn .5s var(--ease-out) .12s both}
+.sc:nth-child(3){animation:cardIn .5s var(--ease-out) .19s both}
+.sc:nth-child(4){animation:cardIn .5s var(--ease-out) .26s both}
+
+/* ── Search bar — glassmorphism ───────────────────────── */
+.search-wrap {
+  background: rgba(255,255,255,.03) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255,255,255,.1) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.07) !important;
+  transition: border-color .2s, box-shadow .2s !important;
+}
+.search-wrap:focus-within {
+  border-color: rgba(238,56,59,.4) !important;
+  box-shadow: 0 0 0 3px rgba(238,56,59,.1), 0 4px 20px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.07) !important;
+}
+.search-wrap input { font-family: var(--font-body) !important; }
+
+/* ── Filter pills ─────────────────────────────────────── */
+.filters button, .interval-pill {
+  transition: all .2s var(--ease-spring) !important;
+  font-family: var(--font-body) !important; font-weight: 500 !important;
+}
+.filters button:hover, .interval-pill:hover { transform: translateY(-1px) !important; }
+.filters button.active, .interval-pill.active {
+  background: var(--red) !important; border-color: var(--red) !important;
+  box-shadow: 0 0 14px rgba(238,56,59,.35), 0 2px 8px rgba(238,56,59,.25) !important;
+}
+
+/* ── Task rows ─────────────────────────────────────────── */
+@keyframes rowIn {
+  from { opacity:0; transform:translateX(-14px); }
+  to   { opacity:1; transform:translateX(0); }
+}
+.tc {
+  border-left: 3px solid transparent !important;
+  transition: background .18s, border-color .18s, transform .2s var(--ease-spring) !important;
+  border-radius: 0 !important;
+}
+.tc:hover {
+  background: rgba(238,56,59,.03) !important;
+  border-left-color: rgba(238,56,59,.4) !important;
+  transform: translateX(3px) !important;
+}
+
+/* Priority date borders */
+.tc.overdue { border-left-color: rgba(238,56,59,.6) !important; }
+.tc.due-today { border-left-color: rgba(245,158,11,.6) !important; }
+.tc.completed-row .tt-title { text-decoration: line-through !important; opacity: .45 !important; }
+
+/* Date chips */
+.tt-date { font-family: var(--font-body) !important; font-size: 10px !important; font-weight: 500 !important; }
+.tt-date-text {
+  background: rgba(255,255,255,.05) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  border-radius: 5px !important;
+  padding: 2px 7px !important;
+  display: inline-block !important;
+}
+.tc.overdue .tt-date-text { background: rgba(238,56,59,.12) !important; border-color: rgba(238,56,59,.25) !important; color: #ff7e7e !important; }
+.tc.due-today .tt-date-text { background: rgba(245,158,11,.12) !important; border-color: rgba(245,158,11,.25) !important; color: #fbbf24 !important; }
+
+/* Status badges */
+.tt-status-sel { font-weight: 600 !important; font-size: 10px !important; letter-spacing: .5px !important; border-radius: 20px !important; }
+.st-pending  { background:rgba(238,56,59,.14)  !important; color:#ff7e7e !important; border:1px solid rgba(238,56,59,.3) !important; }
+.st-completed,.st-done { background:rgba(34,197,94,.12) !important; color:#4ade80 !important; border:1px solid rgba(34,197,94,.25) !important; }
+.st-in-progress,.st-prog { background:rgba(59,130,246,.12) !important; color:#60a5fa !important; border:1px solid rgba(59,130,246,.25) !important; }
+.st-delayed,.st-delay {
+  background:rgba(245,158,11,.12) !important; color:#fbbf24 !important; border:1px solid rgba(245,158,11,.25) !important;
+  animation: delayPulse 2s ease-in-out infinite;
+}
+@keyframes delayPulse { 0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.4)} 50%{box-shadow:0 0 0 5px rgba(245,158,11,0)} }
+
+/* ── Bottom nav ───────────────────────────────────────── */
+.bottomnav {
+  background: linear-gradient(0deg, rgba(0,0,0,.6) 0%, var(--dark-base) 100%) !important;
+  border-top: 1px solid rgba(238,56,59,.12) !important;
+  backdrop-filter: blur(20px) !important;
+}
+.ni {
+  transition: color .2s, transform .2s var(--ease-spring) !important;
+  position: relative !important;
+}
+.ni:hover:not(.active) { transform: translateY(-2px) !important; }
+.ni.active {
+  color: var(--red) !important;
+}
+.ni.active::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 50%; transform: translateX(-50%);
+  width: 32px; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 0 12px rgba(238,56,59,.6);
+}
+.ni svg { transition: transform .2s var(--ease-spring) !important; }
+.ni.active svg { transform: scale(1.15) !important; filter: drop-shadow(0 0 4px rgba(238,56,59,.5)) !important; }
+
+/* ── FAB ──────────────────────────────────────────────── */
+.fab {
+  box-shadow: var(--red-glow), 0 6px 20px rgba(0,0,0,.4) !important;
+  transition: transform .3s var(--ease-spring), box-shadow .3s !important;
+}
+.fab:hover {
+  transform: scale(1.12) translateY(-3px) !important;
+  box-shadow: 0 0 40px rgba(238,56,59,.5), 0 0 80px rgba(238,56,59,.18), 0 12px 32px rgba(0,0,0,.4) !important;
+}
+.fab::before {
+  content: ''; position: absolute; inset: -6px;
+  border-radius: 50%; border: 1.5px solid rgba(238,56,59,.4);
+  animation: fabRing 2.5s ease-in-out infinite;
+}
+@keyframes fabRing { 0%,100%{transform:scale(1);opacity:.6} 50%{transform:scale(1.45);opacity:0} }
+
+/* ── Page transitions ─────────────────────────────────── */
+.page { animation: none !important; }
+.page.page-enter { animation: pageIn .3s var(--ease-out) both !important; }
+.page.page-exit  { animation: pageOut .2s var(--ease-out) both !important; }
+@keyframes pageIn  { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+@keyframes pageOut { from{opacity:1;transform:translateY(0)} to{opacity:0;transform:translateY(-8px)} }
+
+/* ── Skeleton shimmer ─────────────────────────────────── */
+.skel {
+  background: linear-gradient(90deg, rgba(255,255,255,.04) 25%, rgba(255,255,255,.09) 50%, rgba(255,255,255,.04) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  border-radius: 6px;
+}
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+/* ── Toast notifications ──────────────────────────────── */
+#toast-container {
+  position: fixed; bottom: 80px; right: 16px;
+  z-index: 99999; display: flex; flex-direction: column; gap: 8px; pointer-events: none;
+}
+.toast {
+  background: rgba(20,20,20,.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,.1);
+  border-left: 3px solid var(--red);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-family: var(--font-body); font-size: 13px; font-weight: 500;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,.4);
+  animation: toastIn .3s var(--ease-spring) both;
+  pointer-events: auto;
+  max-width: 280px;
+}
+.toast.success { border-left-color: #22c55e; }
+.toast.info    { border-left-color: #3b82f6; }
+@keyframes toastIn  { from{opacity:0;transform:translateX(20px) scale(.95)} to{opacity:1;transform:translateX(0) scale(1)} }
+@keyframes toastOut { from{opacity:1;transform:translateX(0) scale(1)} to{opacity:0;transform:translateX(20px) scale(.95)} }
+
+/* ── Keyboard shortcut hint ───────────────────────────── */
+#kbd-hint {
+  position: fixed; bottom: 80px; left: 16px;
+  background: rgba(20,20,20,.8); backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 8px; padding: 8px 12px;
+  font-family: var(--font-body); font-size: 11px; color: rgba(255,255,255,.5);
+  z-index: 9000; pointer-events: none;
+  animation: fadeInUp .4s var(--ease-out) 1.5s both;
+}
+#kbd-hint kbd {
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+  border-radius: 4px; padding: 1px 5px; font-size: 10px; font-family: monospace;
+  color: rgba(255,255,255,.7);
+}
+@keyframes fadeInUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── Scrollbar ────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #EE383B, #b91c1c); border-radius: 10px; }
+
+/* ── Input focus ──────────────────────────────────────── */
+input:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 0 3px rgba(238,56,59,.18) !important;
+  border-color: rgba(238,56,59,.45) !important; outline: none !important;
+}
+
+/* ── Modals ───────────────────────────────────────────── */
+.mo-box {
+  animation: modalIn .3s var(--ease-out) both !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  box-shadow: 0 24px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(238,56,59,.08) !important;
+}
+@keyframes modalIn { from{opacity:0;transform:scale(.92) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
+
+/* ── Noise texture overlay ────────────────────────────── */
+body::after {
+  content: ''; position: fixed; inset: 0; opacity: 0.015;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4t5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dme8+LogsGjf+aSN1F6KG+iqTFHMzuGE9JCjwEBiGKxoOqz7xePwp4MxkEGnJLKMGKMdgzMOKFxOHTuH6VRBJEGiuQhJp2mLlVFdLsH6rN64oH+kBWEJBxjgGJt5YBnCmv6vfcmNFjHXWlYW/2aFHjPT6UAfYXWrMnEJ3QLkiQfXxEfG9RErTgJPIL2K3B2j+eXD6MWMV/C3B4JTQRR0YMbdcP7TP0m3YMCS8bEiTD0EiOJXQGCCAdKtBMCAuEWKAiXAiG6gW5kSSYI2K0GEmxkIipfBFYKCGETfFRqJCU/rPJMHBwBxMHCKJwMRidY3wVJp8DJMGAQY7BvCe2y5kgFrJIHNChEDIYAbKQVqp4xJeaBYXNDpHAlL0x10y5f73i/PB6j0k5Bq4sK10H8DqZq4UMdJ70ooHM5z09SnY9nRlwNjQHhpJVGrICUEbzB0lM+pB1Q4JG2jfmr89oXFd1cHvU/f6u6YHl1F1+FJB4gqAQKDgdElgjTzD7bGGJc5FyiIaTWZYlCRDiASFMaYl/nnJiABq1c6TaTFaXDp7q6KzHPHc+QEnqEBa7D5EkVwmJVDOTaXe4WBliF7oWt5cTp2x3c0UxDMH7/aBe8LnTRB0HJqY7QcEifxFv3tIrVElp1VXrlMZANUwmK+eDMt7PJnQfY=");
+  pointer-events: none; z-index: 9999;
+}
+
 </style>
 </head>
 <body class="dark">
@@ -4066,6 +4380,221 @@ self.addEventListener('notificationclick', e => {
       // Blob SW may fail in some browsers due to CSP — silent fallback
       console.log('[SAFEX] SW registration skipped:', e.message);
     });
+})();
+</script>
+
+
+<script id="motion-layer">
+(function() {
+  'use strict';
+
+  /* ── Toast system ──────────────────────────────────── */
+  let toastContainer;
+  const toast = (msg, type = 'default', duration = 2800) => {
+    if (!toastContainer) {
+      toastContainer = document.createElement('div');
+      toastContainer.id = 'toast-container';
+      document.body.appendChild(toastContainer);
+    }
+    const el = document.createElement('div');
+    el.className = 'toast' + (type !== 'default' ? ' ' + type : '');
+    el.textContent = msg;
+    toastContainer.appendChild(el);
+    setTimeout(() => {
+      el.style.animation = 'toastOut .3s ease forwards';
+      setTimeout(() => el.remove(), 320);
+    }, duration);
+  };
+
+  /* ── Number counter ────────────────────────────────── */
+  const countUp = (el) => {
+    if (el._counted) return;
+    el._counted = true;
+    const raw = el.textContent.trim();
+    const num = parseInt(raw.replace(/[^\d]/g, ''), 10);
+    if (isNaN(num) || num < 2) return;
+    const suffix = raw.replace(/^\d+/, '');
+    const dur = 1100;
+    const start = performance.now();
+    const tick = now => {
+      const t = Math.min((now - start) / dur, 1);
+      const e = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.round(e * num) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const runCounters = () => document.querySelectorAll('.sc-n').forEach(countUp);
+
+  /* ── Magnetic tilt on stat cards ───────────────────── */
+  const addTilt = () => {
+    document.querySelectorAll('.sc:not([data-tilt])').forEach(card => {
+      card.dataset.tilt = '1';
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width  - 0.5) * 12;
+        const y = ((e.clientY - r.top)  / r.height - 0.5) * 12;
+        card.style.transition = 'none';
+        card.style.transform = `translateY(-5px) rotateX(${-y}deg) rotateY(${x}deg) scale(1.02)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = '';
+        card.style.transform = '';
+      });
+    });
+  };
+
+  /* ── Ripple effect ─────────────────────────────────── */
+  if (!document.getElementById('ripple-style')) {
+    const s = document.createElement('style');
+    s.id = 'ripple-style';
+    s.textContent = '@keyframes ripple{to{transform:scale(1);opacity:0}}';
+    document.head.appendChild(s);
+  }
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('button, .btn, .fab, .tbb, .ni, .filters button');
+    if (!btn) return;
+    const r = btn.getBoundingClientRect();
+    const size = Math.max(r.width, r.height) * 2;
+    const span = document.createElement('span');
+    Object.assign(span.style, {
+      position:'absolute', width:size+'px', height:size+'px',
+      left:(e.clientX-r.left-size/2)+'px', top:(e.clientY-r.top-size/2)+'px',
+      borderRadius:'50%', background:'rgba(238,56,59,.15)', transform:'scale(0)',
+      animation:'ripple .5s ease-out forwards', pointerEvents:'none', zIndex:'99',
+    });
+    if (getComputedStyle(btn).position === 'static') btn.style.position = 'relative';
+    btn.style.overflow = 'hidden';
+    btn.appendChild(span);
+    setTimeout(() => span.remove(), 550);
+  }, true);
+
+  /* ── Priority date coloring ────────────────────────── */
+  const today = new Date(); today.setHours(0,0,0,0);
+  const classifyRows = () => {
+    document.querySelectorAll('.tc:not([data-prio])').forEach(row => {
+      row.dataset.prio = '1';
+      const dateEl = row.querySelector('.tt-date-text');
+      const statusEl = row.querySelector('.tt-status-sel');
+      if (!dateEl) return;
+
+      // Check if completed
+      const statusText = (statusEl ? statusEl.textContent : '').toLowerCase();
+      if (statusText.includes('complet') || row.querySelector('.st-completed, .st-done')) {
+        row.classList.add('completed-row');
+        return;
+      }
+
+      // Parse date: format is DD/MM/YY or similar
+      const txt = dateEl.textContent.trim();
+      const parts = txt.split(/[\/\-\.]/);
+      if (parts.length >= 3) {
+        let d, m, y;
+        // Try DD/MM/YY
+        d = parseInt(parts[0]); m = parseInt(parts[1]) - 1; y = parseInt(parts[2]);
+        if (y < 100) y += 2000;
+        const rowDate = new Date(y, m, d);
+        rowDate.setHours(0,0,0,0);
+        if (rowDate < today) row.classList.add('overdue');
+        else if (rowDate.getTime() === today.getTime()) row.classList.add('due-today');
+      }
+    });
+  };
+
+  /* ── Task row entrance animation ───────────────────── */
+  const animateRows = () => {
+    document.querySelectorAll('.tc:not([data-anim])').forEach((row, i) => {
+      row.dataset.anim = '1';
+      row.style.animation = `rowIn .35s cubic-bezier(0.16,1,0.3,1) ${i * 35}ms both`;
+    });
+  };
+
+  /* ── Patch go() for page transitions ───────────────── */
+  const patchPageTransitions = () => {
+    if (typeof go !== 'function' || go._patched) return;
+    const originalGo = go;
+    window.go = function(page) {
+      const prevActive = document.querySelector('.page.active');
+      if (prevActive) {
+        prevActive.classList.add('page-exit');
+        setTimeout(() => prevActive.classList.remove('page-exit'), 200);
+      }
+      originalGo(page);
+      const newActive = document.querySelector('.page.active');
+      if (newActive) {
+        newActive.classList.remove('page-enter');
+        void newActive.offsetWidth; // reflow
+        newActive.classList.add('page-enter');
+        setTimeout(() => newActive.classList.remove('page-enter'), 300);
+      }
+      // Re-run enhancements
+      setTimeout(() => { runCounters(); addTilt(); animateRows(); classifyRows(); }, 50);
+    };
+    window.go._patched = true;
+  };
+
+  /* ── FAB toast ─────────────────────────────────────── */
+  const hookFab = () => {
+    const fab = document.getElementById('fab');
+    if (fab && !fab._toastHooked) {
+      fab._toastHooked = true;
+      fab.addEventListener('click', () => toast('New task', 'default', 2000));
+    }
+  };
+
+  /* ── Keyboard shortcuts ────────────────────────────── */
+  const setupKbd = () => {
+    document.addEventListener('keydown', e => {
+      // Don't intercept if user is typing in an input
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      if (e.key === '/' || e.key === 'f') {
+        e.preventDefault();
+        const searchInput = document.querySelector('.search-wrap input, .search-wrap .fi');
+        if (searchInput) { searchInput.focus(); toast('Search focused', 'info', 1500); }
+      }
+      if (e.key === 'n' || e.key === 'N') {
+        const fab = document.getElementById('fab');
+        if (fab && fab.style.display !== 'none') { fab.click(); }
+      }
+      if (e.key === '1') { if (typeof go === 'function') go('tasks'); }
+      if (e.key === '2') { if (typeof go === 'function') go('org'); }
+      if (e.key === '3') { if (typeof go === 'function') go('chat'); }
+    });
+
+    // Keyboard hint
+    const hint = document.createElement('div');
+    hint.id = 'kbd-hint';
+    hint.innerHTML = '<kbd>/</kbd> search &nbsp; <kbd>N</kbd> new task &nbsp; <kbd>1-3</kbd> navigate';
+    document.body.appendChild(hint);
+    setTimeout(() => {
+      hint.style.animation = 'toastOut .4s ease forwards';
+      setTimeout(() => hint.remove(), 420);
+    }, 5000);
+  };
+
+  /* ── MutationObserver for dynamic content ──────────── */
+  const mut = new MutationObserver(() => {
+    runCounters(); addTilt(); animateRows(); classifyRows(); hookFab();
+  });
+
+  const init = () => {
+    patchPageTransitions();
+    runCounters();
+    addTilt();
+    animateRows();
+    classifyRows();
+    hookFab();
+    setupKbd();
+    mut.observe(document.body, { childList: true, subtree: true });
+    toast('SAFEX ERP ready', 'success', 2200);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    setTimeout(init, 100);
+  }
 })();
 </script>
 
